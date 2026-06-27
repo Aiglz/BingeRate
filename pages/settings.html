@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramètres • BingeRate</title>
+
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/settings.css">
+
+    <script src="../config.js"></script>
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-top">
+
+                <a href="../index.html" class="logo">
+                    <img src="../assets/logo.png" alt="Logo">
+                    <span>BingeRate</span>
+                </a>
+
+                <nav>
+
+                    <a href="../index.html">
+                        <span>🏠</span>
+                        <span>Accueil</span>
+                    </a>
+
+                    <a href="series.html">
+                        <span>📺</span>
+                        <span>Séries</span>
+                    </a>
+
+                    <a href="stats.html">
+                        <span>📊</span>
+                        <span>Statistiques</span>
+                    </a>
+
+                    <a href="rankings.html">
+                        <span>🏆</span>
+                        <span>Classements</span>
+                    </a>
+
+                    <a href="settings.html" class="active">
+                        <span>⚙️</span>
+                        <span>Paramètres</span>
+                    </a>
+
+                </nav>
+
+            </div>
+
+            <div class="sidebar-bottom">
+
+                <p>BingeRate</p>
+                <small>Version 1.0</small>
+
+            </div>
+
+        </aside>
+
+        <!-- =========================
+             CONTENU
+        ========================== -->
+
+        <main class="content">
+
+            <header class="page-header">
+
+                <h1>Paramètres</h1>
+
+                <p>
+                    Gérez vos sauvegardes, vos préférences et les futures fonctionnalités de BingeRate.
+                </p>
+
+            </header>
+
+            <!-- =========================
+                 SAUVEGARDE
+            ========================== -->
+
+            <section class="settings-section">
+
+                <h2>💾 Sauvegarde</h2>
+
+                <div class="settings-card">
+
+                    <div class="setting-info">
+
+                        <h3>Exporter mes données</h3>
+
+                        <p>
+                            Télécharge un fichier JSON contenant toutes
+                            tes séries, notes, classements et paramètres.
+                        </p>
+
+                    </div>
+
+                    <button id="exportBtn" class="primary-btn">
+                        Exporter
+                    </button>
+
+                </div>
+
+                <div class="settings-card">
+
+                    <div class="setting-info">
+
+                        <h3>Importer une sauvegarde</h3>
+
+                        <p>
+                            Remplace toutes les données actuelles par celles
+                            présentes dans un fichier JSON.
+                        </p>
+
+                    </div>
+
+                    <button id="importBtn" class="secondary-btn">
+                        Importer
+                    </button>
+
+                    <input
+                        type="file"
+                        id="importFile"
+                        accept=".json"
+                        hidden>
+
+                </div>
+
+            </section>
+
+            <!-- =========================
+                 DONNÉES
+            ========================== -->
+
+            <section class="settings-section">
+
+                <h2>🗑️ Données</h2>
+
+                <div class="settings-card danger">
+
+                    <div class="setting-info">
+
+                        <h3>Réinitialiser BingeRate</h3>
+
+                        <p>
+                            Supprime définitivement toutes les données
+                            enregistrées sur cet appareil.
+                        </p>
+
+                    </div>
+
+                    <button id="resetBtn" class="danger-btn">
+                        Tout supprimer
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- =========================
+                 À VENIR
+            ========================== -->
+
+            <section class="settings-section">
+
+                <h2>🚀 À venir</h2>
+
+                <div class="coming-grid">
+
+                    <div class="coming-card">
+                        ☁️ Synchronisation Cloud
+                    </div>
+
+                    <div class="coming-card">
+                        👤 Comptes utilisateurs
+                    </div>
+
+                    <div class="coming-card">
+                        🎨 Personnalisation
+                    </div>
+
+                    <div class="coming-card">
+                        🌙 Mode sombre / clair
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =========================
+                 VERSION
+            ========================== -->
+
+            <section class="settings-section">
+
+                <h2>ℹ️ À propos</h2>
+
+                <div class="settings-card">
+
+                    <div class="setting-info">
+
+                        <h3>BingeRate</h3>
+
+                        <p>
+                            Version 1.0
+                        </p>
+
+                        <p>
+                            Site personnel permettant de noter, suivre
+                            et classer ses séries.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/settings.js"></script>
+
+</body>
+
+</html>
