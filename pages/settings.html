@@ -2,238 +2,419 @@
 <html lang="fr">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Paramètres • BingeRate</title>
 
-    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link
+        rel="stylesheet"
+        href="../css/sidebar.css"
+    >
 
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/settings.css">
+    <link
+        rel="stylesheet"
+        href="../css/settings.css"
+    >
 
-    <script src="../config.js"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
 </head>
 
 <body>
 
-    <div class="layout">
+    <!-- BACKGROUND -->
 
-        <!-- =========================
-             SIDEBAR
-        ========================== -->
+    <div class="blur blur-1"></div>
+    <div class="blur blur-2"></div>
+    <div class="blur blur-3"></div>
 
-        <aside class="sidebar">
+    <!-- SIDEBAR -->
 
-            <div class="sidebar-top">
+    <aside class="sidebar">
 
-                <a href="../index.html" class="logo">
-                    <img src="../assets/logo.png" alt="Logo">
-                    <span>BingeRate</span>
-                </a>
+        <a
+            href="../index.html"
+            class="sidebar-logo"
+        >
 
-                <nav>
+            <div class="sidebar-logo-icon">
 
-                    <a href="../index.html">
-                        <span>🏠</span>
-                        <span>Accueil</span>
-                    </a>
-
-                    <a href="series.html">
-                        <span>📺</span>
-                        <span>Séries</span>
-                    </a>
-
-                    <a href="stats.html">
-                        <span>📊</span>
-                        <span>Statistiques</span>
-                    </a>
-
-                    <a href="rankings.html">
-                        <span>🏆</span>
-                        <span>Classements</span>
-                    </a>
-
-                    <a href="settings.html" class="active">
-                        <span>⚙️</span>
-                        <span>Paramètres</span>
-                    </a>
-
-                </nav>
+                <i class="fa-solid fa-tv"></i>
 
             </div>
 
-            <div class="sidebar-bottom">
+            <span>
 
-                <p>BingeRate</p>
-                <small>Version 1.0</small>
+                BingeRate
+
+            </span>
+
+        </a>
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="../index.html"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+
+                    Accueil
+
+                </span>
+
+            </a>
+
+            <a
+                href="series.html"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-film"></i>
+
+                <span>
+
+                    Séries
+
+                </span>
+
+            </a>
+
+            <a
+                href="calendar.html"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <span>
+
+                    Calendrier
+
+                </span>
+
+            </a>
+
+            <a
+                href="stats.html"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+
+                    Statistiques
+
+                </span>
+
+            </a>
+
+            <a
+                href="rankings.html"
+                class="nav-link"
+            >
+
+                <i class="fa-solid fa-trophy"></i>
+
+                <span>
+
+                    Classements
+
+                </span>
+
+            </a>
+
+            <a
+                href="settings.html"
+                class="nav-link active"
+            >
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>
+
+                    Paramètres
+
+                </span>
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- CONTENU -->
+
+    <main class="content">
+
+        <header class="page-header">
+
+            <h1>
+
+                Paramètres
+
+            </h1>
+
+            <p>
+
+                Sauvegarde, importation, réinitialisation
+                et futures fonctionnalités de BingeRate.
+
+            </p>
+
+        </header>
+
+        <!-- SAUVEGARDE -->
+
+        <section class="settings-section">
+
+            <h2>
+
+                💾 Sauvegarde
+
+            </h2>
+
+            <div class="settings-card">
+
+                <div class="setting-info">
+
+                    <h3>
+
+                        Exporter les données
+
+                    </h3>
+
+                    <p>
+
+                        Télécharge un fichier JSON contenant
+                        toutes tes séries, notes, classements
+                        et paramètres.
+
+                    </p>
+
+                </div>
+
+                <button
+                    id="exportBtn"
+                    class="primary-btn"
+                >
+
+                    Exporter
+
+                </button>
 
             </div>
 
-        </aside>
+            <div class="settings-card">
 
-        <!-- =========================
-             CONTENU
-        ========================== -->
+                <div class="setting-info">
 
-        <main class="content">
+                    <h3>
 
-            <header class="page-header">
+                        Importer une sauvegarde
 
-                <h1>Paramètres</h1>
+                    </h3>
 
-                <p>
-                    Gérez vos sauvegardes, vos préférences et les futures fonctionnalités de BingeRate.
-                </p>
+                    <p>
 
-            </header>
+                        Remplace les données actuelles
+                        par celles présentes dans un
+                        fichier JSON.
 
-            <!-- =========================
-                 SAUVEGARDE
-            ========================== -->
-
-            <section class="settings-section">
-
-                <h2>💾 Sauvegarde</h2>
-
-                <div class="settings-card">
-
-                    <div class="setting-info">
-
-                        <h3>Exporter mes données</h3>
-
-                        <p>
-                            Télécharge un fichier JSON contenant toutes
-                            tes séries, notes, classements et paramètres.
-                        </p>
-
-                    </div>
-
-                    <button id="exportBtn" class="primary-btn">
-                        Exporter
-                    </button>
+                    </p>
 
                 </div>
 
-                <div class="settings-card">
+                <button
+                    id="importBtn"
+                    class="secondary-btn"
+                >
 
-                    <div class="setting-info">
+                    Importer
 
-                        <h3>Importer une sauvegarde</h3>
+                </button>
 
-                        <p>
-                            Remplace toutes les données actuelles par celles
-                            présentes dans un fichier JSON.
-                        </p>
+                <input
+                    type="file"
+                    id="importFile"
+                    accept=".json"
+                    hidden
+                >
 
-                    </div>
+            </div>
 
-                    <button id="importBtn" class="secondary-btn">
-                        Importer
-                    </button>
+        </section>
 
-                    <input
-                        type="file"
-                        id="importFile"
-                        accept=".json"
-                        hidden>
+                <!-- DONNÉES -->
 
-                </div>
+        <section class="settings-section">
 
-            </section>
+            <h2>
 
-            <!-- =========================
-                 DONNÉES
-            ========================== -->
+                🗑️ Données
 
-            <section class="settings-section">
+            </h2>
 
-                <h2>🗑️ Données</h2>
+            <div class="settings-card danger">
 
-                <div class="settings-card danger">
+                <div class="setting-info">
 
-                    <div class="setting-info">
+                    <h3>
 
-                        <h3>Réinitialiser BingeRate</h3>
+                        Réinitialiser BingeRate
 
-                        <p>
-                            Supprime définitivement toutes les données
-                            enregistrées sur cet appareil.
-                        </p>
+                    </h3>
 
-                    </div>
+                    <p>
 
-                    <button id="resetBtn" class="danger-btn">
-                        Tout supprimer
-                    </button>
+                        Supprime définitivement toutes les
+                        données enregistrées sur cet appareil.
+
+                        Cette action est irréversible.
+
+                    </p>
 
                 </div>
 
-            </section>
+                <button
+                    id="resetBtn"
+                    class="danger-btn"
+                >
 
-            <!-- =========================
-                 À VENIR
-            ========================== -->
+                    Tout supprimer
 
-            <section class="settings-section">
+                </button>
 
-                <h2>🚀 À venir</h2>
+            </div>
 
-                <div class="coming-grid">
+        </section>
 
-                    <div class="coming-card">
-                        ☁️ Synchronisation Cloud
-                    </div>
+        <!-- À VENIR -->
 
-                    <div class="coming-card">
-                        👤 Comptes utilisateurs
-                    </div>
+        <section class="settings-section">
 
-                    <div class="coming-card">
-                        🎨 Personnalisation
-                    </div>
+            <h2>
 
-                    <div class="coming-card">
-                        🌙 Mode sombre / clair
-                    </div>
+                🚀 À venir
 
-                </div>
+            </h2>
 
-            </section>
+            <div class="coming-grid">
 
-            <!-- =========================
-                 VERSION
-            ========================== -->
+                <div class="coming-card">
 
-            <section class="settings-section">
+                    ☁️
+                    <br><br>
 
-                <h2>ℹ️ À propos</h2>
-
-                <div class="settings-card">
-
-                    <div class="setting-info">
-
-                        <h3>BingeRate</h3>
-
-                        <p>
-                            Version 1.0
-                        </p>
-
-                        <p>
-                            Site personnel permettant de noter, suivre
-                            et classer ses séries.
-                        </p>
-
-                    </div>
+                    Synchronisation Cloud
 
                 </div>
 
-            </section>
+                <div class="coming-card">
 
-        </main>
+                    👤
+                    <br><br>
 
-    </div>
+                    Comptes utilisateurs
 
-    <script src="../js/settings.js"></script>
+                </div>
+
+                <div class="coming-card">
+
+                    🎨
+                    <br><br>
+
+                    Personnalisation
+
+                </div>
+
+                <div class="coming-card">
+
+                    🌙
+                    <br><br>
+
+                    Mode clair / sombre
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- À PROPOS -->
+
+        <section class="settings-section">
+
+            <h2>
+
+                ℹ️ À propos
+
+            </h2>
+
+            <div class="settings-card">
+
+                <div class="setting-info">
+
+                    <h3>
+
+                        BingeRate
+
+                    </h3>
+
+                    <p>
+
+                        Version 1.0
+
+                    </p>
+
+                    <p>
+
+                        Développé pour suivre,
+                        noter et classer facilement
+                        toutes tes séries.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script
+        src="../js/settings.js"
+    ></script>
 
 </body>
 
