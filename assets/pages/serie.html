@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BingeRate • Série</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/serie.css"
+    >
+
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- BACKGROUND -->
+
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <!-- TOOLTIP -->
+
+    <div
+        id="episodeTooltip"
+        class="episode-tooltip"
+    >
+
+        <div class="tooltip-title"></div>
+
+        <div class="tooltip-rating"></div>
+
+        <div class="tooltip-code"></div>
+
+    </div>
+
+    <!-- HERO -->
+
+    <section
+        id="hero"
+        class="hero"
+    >
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <!-- POSTER -->
+
+            <img
+                id="poster"
+                class="poster"
+                src=""
+                alt=""
+            >
+
+            <!-- INFOS -->
+
+            <div class="infos">
+
+                <div
+                    id="heroBadges"
+                    class="hero-badges"
+                ></div>
+
+                <h1 id="title">
+
+                    Chargement...
+
+                </h1>
+
+                <p
+                    id="genres"
+                    class="genres"
+                ></p>
+
+                <div
+                    id="heroMeta"
+                    class="hero-meta"
+                ></div>
+
+                <p
+                    id="overview"
+                    class="overview"
+                ></p>
+
+                <div class="hero-actions">
+
+                    <a
+                        id="chartLink"
+                        href="#"
+                        class="chart-btn"
+                    >
+
+                        <i
+                            class="
+                            fa-solid
+                            fa-chart-line
+                            "
+                        ></i>
+
+                        Voir l'analyse
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- SCORE RING -->
+
+            <div class="hero-side-column">
+
+                <div class="score-card">
+
+                    <div class="card-title">
+
+                        <i
+                            class="
+                            fa-solid
+                            fa-star
+                            "
+                        ></i>
+
+                        Ma moyenne
+
+                    </div>
+
+                    <div
+                        id="averageBadge"
+                        class="score-ring"
+                    >
+
+                        <svg
+                            viewBox="0 0 120 120"
+                            class="ring-svg"
+                        >
+
+                            <circle
+                                cx="60"
+                                cy="60"
+                                r="52"
+                                class="ring-bg"
+                            ></circle>
+
+                            <circle
+                                id="averageRing"
+                                cx="60"
+                                cy="60"
+                                r="52"
+                                class="ring-progress"
+                            ></circle>
+
+                        </svg>
+
+                        <div
+                            id="averageValue"
+                            class="ring-value"
+                        >
+
+                            —
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- QUICK STATS -->
+
+                <div class="hero-side-card">
+
+                    <h3>
+
+                        <i
+                            class="
+                            fa-solid
+                            fa-chart-pie
+                            "
+                        ></i>
+
+                        Résumé rapide
+
+                    </h3>
+
+                    <div
+                        id="quickStats"
+                        class="quick-stats"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- MAIN -->
+
+    <main>
+
+        <!-- PROGRESSION -->
+
+        <section class="progress-section">
+
+            <div class="progress-card">
+
+                <div class="progress-header">
+
+                    <h3>
+
+                        <i
+                            class="
+                            fa-solid
+                            fa-chart-line
+                            "
+                        ></i>
+
+                        Progression de notation
+
+                    </h3>
+
+                    <span
+                        id="progressPercent"
+                    >
+
+                        0%
+
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill"
+                    ></div>
+
+                </div>
+
+                <div
+                    id="progressText"
+                    class="progress-text"
+                >
+
+                    0 / 0 épisodes notés
+
+                </div>
+
+            </div>
+
+            <!-- DERNIER EPISODE -->
+
+            <div
+                id="lastEpisodeCard"
+                class="last-episode-card"
+            >
+
+                <div class="label">
+
+                    <i
+                        class="
+                        fa-solid
+                        fa-fire
+                        "
+                    ></i>
+
+                    Dernier épisode noté
+
+                </div>
+
+                <div
+                    id="lastEpisodeContent"
+                >
+
+                    —
+
+                </div>
+
+            </div>
+
+            <!-- SAISON FAVORITE -->
+
+            <div
+                id="favoriteSeasonCard"
+                class="last-episode-card"
+            >
+
+                <div class="label">
+
+                    <i
+                        class="
+                        fa-solid
+                        fa-trophy
+                        "
+                    ></i>
+
+                    Saison favorite
+
+                </div>
+
+                <div
+                    id="favoriteSeasonContent"
+                >
+
+                    —
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- LEGEND -->
+
+        <section class="legend-section">
+
+            <div class="legend-card">
+
+                <h3>
+
+                    <i
+                        class="
+                        fa-solid
+                        fa-palette
+                        "
+                    ></i>
+
+                    Légende des notes
+
+                </h3>
+
+                <div class="rating-legend">
+
+                    <span class="legend-pill note-purple">0 - 4</span>
+
+                    <span class="legend-pill note-orange">4 - 6</span>
+
+                    <span class="legend-pill note-dark-orange">6 - 7</span>
+
+                    <span class="legend-pill note-yellow">7 - 8</span>
+
+                    <span class="legend-pill note-green">8 - 9</span>
+
+                    <span class="legend-pill note-dark-green">9 - 9,5</span>
+
+                    <span class="legend-pill note-blue">10</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ANALYSE PERSONNELLE -->
+
+        <section
+            class="analysis-section"
+        >
+
+            <div
+                class="analysis-card"
+            >
+
+                <div
+                    class="analysis-header"
+                >
+
+                    <i
+                        class="
+                        fa-solid
+                        fa-wand-magic-sparkles
+                        "
+                    ></i>
+
+                    Analyse personnelle
+
+                </div>
+
+                <div
+                    id="personalAnalysis"
+                >
+
+                    Chargement...
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SAISONS -->
+
+        <section class="seasons-section">
+
+            <div class="section-title">
+
+                <h2>
+
+                    Saisons
+
+                </h2>
+
+                <span>
+
+                    Note chaque épisode individuellement
+
+                </span>
+
+            </div>
+
+            <div
+                id="seasonsContainer"
+            ></div>
+
+        </section>
+
+    </main>
+
+    <!-- MODAL NOTE -->
+
+    <div
+        id="ratingModal"
+        class="rating-modal"
+    >
+
+        <div
+            class="rating-content"
+        >
+
+            <div
+                class="rating-header"
+            >
+
+                <h3>
+
+                    <i
+                        class="
+                        fa-solid
+                        fa-star
+                        "
+                    ></i>
+
+                    Noter l'épisode
+
+                </h3>
+
+                <button
+                    id="closeRating"
+                    class="close-rating"
+                >
+
+                    <i
+                        class="
+                        fa-solid
+                        fa-xmark
+                        "
+                    ></i>
+
+                </button>
+
+            </div>
+
+            <!-- NOTE EN GRAND -->
+
+            <div
+                id="selectedRating"
+                class="selected-rating"
+            >
+
+                —
+
+            </div>
+
+            <!-- SOUS TEXTE -->
+
+            <div
+                class="selected-rating-subtitle"
+            >
+
+                Sélectionnez votre note
+
+            </div>
+
+            <!-- BOUTONS -->
+
+            <div
+                id="ratingButtons"
+                class="rating-grid"
+            ></div>
+
+        </div>
+
+    </div>
+
+    <!-- TOAST -->
+
+    <div
+        id="toast"
+        class="toast"
+    ></div>
+
+    <!-- SVG SYMBOLS -->
+
+    <svg
+        width="0"
+        height="0"
+        style="position:absolute"
+    >
+
+        <defs>
+
+            <linearGradient
+                id="purpleGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#a095ff"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#6c63ff"
+                />
+
+            </linearGradient>
+
+            <linearGradient
+                id="greenGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#4ade80"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#16a34a"
+                />
+
+            </linearGradient>
+
+        </defs>
+
+    </svg>
+
+    <!-- SCRIPTS -->
+
+    <script src="../config.js"></script>
+
+    <script src="../js/serie.js"></script>
+
+</body>
+
+</html>

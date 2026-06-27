@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BingeRate • Séries</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/sidebar.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/series.css"
+    >
+
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <a
+            href="index.html"
+            class="sidebar-logo"
+        >
+
+            <div
+                class="sidebar-logo-icon"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-tv
+                    "
+                ></i>
+
+            </div>
+
+            <span>
+
+                BingeRate
+
+            </span>
+
+        </a>
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="../index.html"
+                class="nav-link"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-house
+                    "
+                ></i>
+
+                <span>
+
+                    Accueil
+
+                </span>
+
+            </a>
+
+            <a
+                href="series.html"
+                class="nav-link active"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-film
+                    "
+                ></i>
+
+                <span>
+
+                    Séries
+
+                </span>
+
+            </a>
+
+            <a
+                href="calendar.html"
+                class="nav-link"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-calendar-days
+                    "
+                ></i>
+
+                <span>
+
+                    Calendrier
+
+                </span>
+
+            </a>
+
+            <a
+                href="stats.html"
+                class="nav-link"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-chart-line
+                    "
+                ></i>
+
+                <span>
+
+                    Statistiques
+
+                </span>
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- BACKGROUND -->
+
+    <div class="blur blur-1"></div>
+    <div class="blur blur-2"></div>
+
+    <!-- MAIN -->
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-left">
+
+                <span class="hero-tag">
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                    Collection & notation
+
+                </span>
+
+                <h1>
+
+                    Recherchez.<br>
+
+                    Ajoutez.
+
+                    <span>
+                        Analysez.
+                    </span>
+
+                </h1>
+
+                <p>
+
+                    Trouvez une série,
+                    ajoutez-la à votre collection
+                    et notez chaque épisode.
+
+                </p>
+
+                <div class="search-wrapper">
+
+                    <div class="search-box">
+
+                        <i
+                            class="
+                            fa-solid
+                            fa-magnifying-glass
+                            "
+                        ></i>
+
+                        <input
+                            id="searchInput"
+                            type="text"
+                            placeholder="Rechercher une série..."
+                        >
+
+                    </div>
+
+                    <button id="searchBtn">
+
+                        Rechercher
+
+                    </button>
+
+                </div>
+
+                <div
+                    id="popularSearches"
+                    class="popular-searches"
+                >
+
+                    <span>
+                        Recherches populaires :
+                    </span>
+
+                    <button>Breaking Bad</button>
+                    <button>Dark</button>
+                    <button>Lost</button>
+                    <button>The Office</button>
+                    <button>Peaky Blinders</button>
+
+                </div>
+
+            </div>
+
+            <!-- HERO VISUAL -->
+
+            <div class="hero-right">
+
+                <div class="floating-posters">
+
+                    <div class="poster-card poster-1"></div>
+                    <div class="poster-card poster-2"></div>
+                    <div class="poster-card poster-3"></div>
+                    <div class="poster-card poster-4"></div>
+                    <div class="poster-card poster-5"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- STATS -->
+
+        <section class="stats-section">
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+
+                    <i class="fa-solid fa-tv"></i>
+
+                </div>
+
+                <div>
+
+                    <strong id="seriesCount">
+
+                        0
+
+                    </strong>
+
+                    <span>
+                        Séries dans la collection
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon yellow">
+
+                    <i class="fa-solid fa-star"></i>
+
+                </div>
+
+                <div>
+
+                    <strong id="episodesCount">
+
+                        0
+
+                    </strong>
+
+                    <span>
+                        Épisodes notés
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </div>
+
+                <div>
+
+                    <strong id="globalAverage">
+
+                        —
+
+                    </strong>
+
+                    <span>
+                        Moyenne globale
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon pink">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                </div>
+
+                <div>
+
+                    <strong id="masterpiecesCount">
+
+                        0
+
+                    </strong>
+
+                    <span>
+                        Chefs-d'œuvre
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- COLLECTION -->
+
+        <section class="collection-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+
+                        Votre collection
+
+                    </h2>
+
+                    <span id="collectionCount">
+
+                        0 série
+
+                    </span>
+
+                </div>
+
+                <div class="collection-actions">
+
+                    <input
+                        id="collectionSearch"
+                        type="text"
+                        placeholder="Rechercher dans ma collection..."
+                    >
+
+                    <select id="sortCollection">
+
+                        <option value="recent">
+                            Récent
+                        </option>
+
+                        <option value="name">
+                            Nom
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div
+                id="mySeries"
+                class="collection-grid"
+            >
+
+            </div>
+
+            <div
+                id="loadMoreTrigger"
+                class="load-more-trigger"
+            >
+        
+            </div>
+
+            <!-- ADD CARD -->
+
+            <div
+                id="addSeriesCard"
+                class="add-series-card"
+            >
+
+                <div
+                    class="add-icon"
+                >
+
+                    <i
+                        class="
+                        fa-solid
+                        fa-plus
+                        "
+                    ></i>
+
+                </div>
+
+                <h3>
+
+                    Ajouter une série
+
+                </h3>
+
+                <p>
+
+                    Recherche une nouvelle série
+                    et ajoute-la à ta collection.
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- RESULTS -->
+
+        <section
+            id="resultsSection"
+            class="
+            results-section
+            hidden
+            "
+        >
+
+            <div
+                class="section-header"
+            >
+
+                <div>
+
+                    <h2>
+
+                        Résultats
+
+                    </h2>
+
+                    <span
+                        id="resultsCount"
+                    >
+
+                        0 résultat
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div
+                id="results"
+                class="results-grid"
+            ></div>
+
+        </section>
+
+        <!-- RECENT SEARCHES -->
+
+        <section
+            id="recentSection"
+            class="recent-section"
+        >
+
+            <div
+                class="section-header"
+            >
+
+                <div>
+
+                    <h2>
+
+                        Recherches récentes
+
+                    </h2>
+
+                </div>
+
+                <button
+                    id="clearRecent"
+                    class="clear-btn"
+                >
+
+                    Tout effacer
+
+                </button>
+
+            </div>
+
+            <div
+                id="recentSearches"
+                class="recent-searches"
+            ></div>
+
+        </section>
+
+        <!-- CTA -->
+
+        <section
+            class="cta-section"
+        >
+
+            <div
+                class="cta-card"
+            >
+
+                <div
+                    class="cta-left"
+                >
+
+                    <div
+                        class="cta-icon"
+                    >
+
+                        <i
+                            class="
+                            fa-solid
+                            fa-sparkles
+                            "
+                        ></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+
+                            Ajoutez une série à votre collection
+
+                        </h3>
+
+                        <p>
+
+                            Vos statistiques,
+                            analyses et classements
+                            apparaîtront automatiquement.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button
+                    id="discoverBtn"
+                    class="discover-btn"
+                >
+
+                    Découvrir une série
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- TOAST -->
+
+    <div
+        id="toast"
+        class="toast"
+    >
+
+        Notification
+
+    </div>
+
+    <!-- SVG GRADIENTS -->
+
+    <svg
+        width="0"
+        height="0"
+        style="position:absolute"
+    >
+
+        <defs>
+
+            <linearGradient
+                id="purpleGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#a095ff"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#6c63ff"
+                />
+
+            </linearGradient>
+
+            <linearGradient
+                id="greenGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#4ade80"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#16a34a"
+                />
+
+            </linearGradient>
+
+            <linearGradient
+                id="yellowGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#facc15"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#f59e0b"
+                />
+
+            </linearGradient>
+
+        </defs>
+
+    </svg>
+
+    <!-- SCRIPTS -->
+
+    <script src="../config.js"></script>
+
+    <script src="../js/series.js"></script>
+
+</body>
+
+</html>

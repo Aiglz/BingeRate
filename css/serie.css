@@ -1,0 +1,2173 @@
+/* ================================================= */
+/* RESET */
+/* ================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+:root{
+
+    --bg:#060b12;
+
+    --card:
+    rgba(18,26,40,.92);
+
+    --card-hover:
+    rgba(25,35,52,.95);
+
+    --border:
+    rgba(255,255,255,.06);
+
+    --text:#ffffff;
+
+    --muted:
+    rgba(255,255,255,.58);
+
+    --purple:#8b7fff;
+    --purple-light:#a095ff;
+
+    --green:#4ade80;
+
+    --yellow:#facc15;
+
+    --orange:#fb923c;
+
+    --red:#ef4444;
+
+    --shadow:
+    0 25px 80px rgba(
+        0,
+        0,
+        0,
+        .45
+    );
+
+}
+
+/* ================================================= */
+/* BODY */
+/* ================================================= */
+
+body{
+
+    background:
+    radial-gradient(
+        circle at top,
+        #1a2540 0%,
+        #101722 30%,
+        #060b12 100%
+    );
+
+    color:var(--text);
+
+    font-family:
+    "Manrope",
+    sans-serif;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+/* ================================================= */
+/* GLOWS */
+/* ================================================= */
+
+.bg-glow{
+
+    position:fixed;
+
+    border-radius:50%;
+
+    filter:blur(120px);
+
+    pointer-events:none;
+
+    z-index:-1;
+
+}
+
+.glow-1{
+
+    width:420px;
+    height:420px;
+
+    top:-120px;
+    left:-120px;
+
+    background:
+    rgba(
+        139,
+        127,
+        255,
+        .18
+    );
+
+}
+
+.glow-2{
+
+    width:380px;
+    height:380px;
+
+    right:-100px;
+    top:250px;
+
+    background:
+    rgba(
+        74,
+        222,
+        128,
+        .08
+    );
+
+}
+
+/* ================================================= */
+/* TOOLTIP PREMIUM */
+/* ================================================= */
+
+.episode-tooltip{
+
+    position:fixed;
+
+    z-index:99999;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    min-width:220px;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(20,29,44,.98),
+        rgba(11,17,27,.99)
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .08
+    );
+
+    backdrop-filter:
+    blur(20px);
+
+    box-shadow:
+    0 20px 60px rgba(
+        0,
+        0,
+        0,
+        .45
+    );
+
+    transition:
+    opacity .2s ease,
+    transform .2s ease;
+
+    transform:
+    translateY(10px);
+
+}
+
+.episode-tooltip.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+    translateY(0);
+
+}
+
+.tooltip-title{
+
+    font-weight:800;
+
+    margin-bottom:8px;
+
+}
+
+.tooltip-rating{
+
+    color:#4ade80;
+
+    font-weight:800;
+
+    margin-bottom:6px;
+
+}
+
+.tooltip-code{
+
+    color:var(--muted);
+
+    font-size:.82rem;
+
+}
+
+/* ================================================= */
+/* HERO */
+/* ================================================= */
+
+.hero{
+
+    position:relative;
+
+    min-height:82vh;
+
+    background-size:cover;
+
+    background-position:center;
+
+    display:flex;
+
+    align-items:flex-end;
+
+}
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        #060b12 0%,
+        rgba(6,11,18,.92) 45%,
+        rgba(6,11,18,.35) 100%
+    );
+
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+    width:min(
+        1550px,
+        92%
+    );
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+    280px
+    minmax(0,1fr)
+    320px;
+
+    gap:36px;
+
+    align-items:end;
+
+    padding-bottom:70px;
+
+}
+
+.poster{
+
+    width:100%;
+
+    border-radius:30px;
+
+    box-shadow:
+    0 30px 100px rgba(
+        0,
+        0,
+        0,
+        .6
+    );
+
+}
+
+/* ================================================= */
+/* HERO INFO */
+/* ================================================= */
+
+.infos h1{
+
+    font-size:
+    clamp(
+        3.5rem,
+        6vw,
+        5.8rem
+    );
+
+    line-height:.92;
+
+    letter-spacing:-3px;
+
+    margin-bottom:18px;
+
+}
+
+.genres{
+
+    color:var(--purple);
+
+    font-weight:700;
+
+    margin-bottom:16px;
+
+}
+
+.overview{
+
+    max-width:850px;
+
+    line-height:1.9;
+
+    color:
+    rgba(
+        255,
+        255,
+        255,
+        .78
+    );
+
+    margin-top:24px;
+
+    margin-bottom:30px;
+
+}
+
+.hero-badges{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:18px;
+
+}
+
+.hero-badge{
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    background:
+    rgba(
+        255,
+        255,
+        255,
+        .08
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .05
+    );
+
+    font-size:.78rem;
+
+    font-weight:700;
+
+}
+
+.hero-meta{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:18px;
+
+}
+
+.hero-meta-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:
+    rgba(
+        255,
+        255,
+        255,
+        .85
+    );
+
+}
+
+/* ================================================= */
+/* ACTION BUTTON */
+/* ================================================= */
+
+.chart-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:15px 26px;
+
+    border-radius:18px;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:800;
+
+    background:
+    linear-gradient(
+        135deg,
+        #8b7fff,
+        #6c63ff
+    );
+
+    transition:.25s ease;
+
+}
+
+.chart-btn:hover{
+
+    transform:
+    translateY(-3px);
+
+}
+
+/* ================================================= */
+/* RIGHT COLUMN */
+/* ================================================= */
+
+.hero-side-column{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+/* ================================================= */
+/* SCORE CARD */
+/* ================================================= */
+
+.score-card{
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(20,29,44,.96),
+        rgba(11,17,27,.99)
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .06
+    );
+
+    border-radius:30px;
+
+    padding:24px;
+
+    backdrop-filter:
+    blur(16px);
+
+    box-shadow:
+    var(--shadow);
+
+}
+
+.card-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:700;
+
+    margin-bottom:22px;
+
+}
+
+.card-title i{
+
+    color:#facc15;
+
+}
+
+/* ================================================= */
+/* SCORE RING */
+/* ================================================= */
+
+.score-ring::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:22px;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+
+        circle,
+
+        rgba(255,255,255,.05),
+
+        rgba(0,0,0,.25)
+
+    );
+
+    z-index:-1;
+
+}
+
+.score-ring{
+
+    position:relative;
+
+    width:250px;
+
+    height:250px;
+
+    margin:auto;
+
+}
+
+.ring-svg{
+
+    width:100%;
+    height:100%;
+
+    transform:
+    rotate(-90deg);
+
+    overflow:visible;
+
+}
+
+.ring-bg{
+
+    fill:none;
+
+    stroke:#222c38;
+
+    stroke-width:10;
+
+}
+
+.ring-progress{
+
+    fill:none;
+
+    stroke:#8b7fff;
+
+    stroke-width:11;
+
+    stroke-linecap:round;
+
+    stroke-dasharray:327;
+
+    stroke-dashoffset:327;
+
+    filter:
+
+        drop-shadow(0 0 18px currentColor);
+
+    transition:
+
+        stroke .35s,
+
+        stroke-dashoffset .8s,
+
+        filter .35s;
+
+}
+
+.ring-value{
+
+    font-size:4.2rem;
+
+    font-weight:900;
+
+    letter-spacing:-4px;
+
+    line-height:1;
+
+    text-shadow:
+        0 0 20px rgba(255,255,255,.12);
+
+}
+
+.ring-center{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    pointer-events:none;
+
+}
+
+#ringLabel{
+
+    margin-top:6px;
+
+    font-size:1.5rem;
+
+    line-height:1;
+
+    color:#7d8697;
+
+    font-weight:700;
+
+}
+
+/* ================================================= */
+/* QUICK CARD */
+/* ================================================= */
+
+.hero-side-card{
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(20,29,44,.96),
+        rgba(11,17,27,.99)
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .06
+    );
+
+    border-radius:28px;
+
+    padding:24px;
+
+    backdrop-filter:
+    blur(16px);
+
+    box-shadow:
+    var(--shadow);
+
+}
+
+.hero-side-card h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:18px;
+
+    font-size:1rem;
+
+}
+
+.hero-side-card h3 i{
+
+    color:#8b7fff;
+
+}
+
+.quick-stats{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+.quick-stats div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding-bottom:12px;
+
+    border-bottom:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .05
+    );
+
+}
+
+.quick-stats div:last-child{
+
+    border-bottom:none;
+
+}
+
+.quick-stats span{
+
+    color:var(--muted);
+
+}
+
+.quick-stats strong{
+
+    font-weight:800;
+
+}
+
+/* ================================================= */
+/* MAIN */
+/* ================================================= */
+
+main{
+
+    width:min(
+        1550px,
+        92%
+    );
+
+    margin:auto;
+
+    padding:
+    40px 0
+    100px;
+
+}
+
+/* ================================================= */
+/* PROGRESSION */
+/* ================================================= */
+
+.progress-section{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr
+    280px
+    280px;
+
+    gap:22px;
+
+    margin-bottom:28px;
+
+}
+
+.progress-card{
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(20,29,44,.97),
+        rgba(11,17,27,.99)
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .06
+    );
+
+    border-radius:30px;
+
+    padding:26px;
+
+    box-shadow:
+    var(--shadow);
+
+}
+
+.progress-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.progress-header h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.progress-header h3 i{
+
+    color:#8b7fff;
+
+}
+
+#progressPercent{
+
+    font-size:2rem;
+
+    font-weight:900;
+
+    color:#8b7fff;
+
+}
+
+.progress-bar{
+
+    height:14px;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    background:
+    rgba(
+        255,
+        255,
+        255,
+        .05
+    );
+
+}
+
+.progress-fill{
+
+    width:0;
+
+    height:100%;
+
+    border-radius:999px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #8b7fff,
+        #6c63ff
+    );
+
+    transition:
+    width .6s ease;
+
+}
+
+.progress-text{
+
+    margin-top:14px;
+
+    color:var(--muted);
+
+}
+
+/* ================================================= */
+/* INFO CARDS */
+/* ================================================= */
+
+.last-episode-card{
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(20,29,44,.97),
+        rgba(11,17,27,.99)
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .06
+    );
+
+    border-radius:30px;
+
+    padding:24px;
+
+    box-shadow:
+    var(--shadow);
+
+}
+
+.last-episode-card .label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:14px;
+
+    font-size:.82rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+    color:var(--muted);
+
+}
+
+.last-episode-card .label i{
+
+    color:#fb923c;
+
+}
+
+#lastEpisodeContent,
+#favoriteSeasonContent{
+
+    font-weight:800;
+
+    line-height:1.7;
+
+    font-size:.95rem;
+
+}
+
+/* ================================================= */
+/* LEGEND */
+/* ================================================= */
+
+.legend-section{
+
+    margin-bottom:28px;
+
+}
+
+.legend-card{
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(20,29,44,.97),
+        rgba(11,17,27,.99)
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .06
+    );
+
+    border-radius:30px;
+
+    padding:26px;
+
+    box-shadow:
+    var(--shadow);
+
+}
+
+.legend-card h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:18px;
+
+}
+
+.legend-card h3 i{
+
+    color:#8b7fff;
+
+}
+
+.legend-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        6,
+        1fr
+    );
+
+    gap:14px;
+
+}
+
+.legend-grid div{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    justify-content:center;
+
+    padding:10px;
+
+    border-radius:14px;
+
+    background:
+    rgba(
+        255,
+        255,
+        255,
+        .03
+    );
+
+}
+
+.dot{
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+}
+
+/* ================================================= */
+/* ANALYSIS */
+/* ================================================= */
+
+.analysis-section{
+
+    margin-bottom:34px;
+
+}
+
+.analysis-card{
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(20,29,44,.97),
+        rgba(11,17,27,.99)
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .06
+    );
+
+    border-radius:30px;
+
+    padding:28px;
+
+    box-shadow:
+    var(--shadow);
+
+}
+
+.analysis-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:18px;
+
+    font-size:1.1rem;
+
+    font-weight:800;
+
+}
+
+.analysis-header i{
+
+    color:#facc15;
+
+}
+
+#personalAnalysis{
+
+    color:
+    rgba(
+        255,
+        255,
+        255,
+        .78
+    );
+
+    line-height:1.8;
+
+}
+
+/* ================================================= */
+/* SEASONS */
+/* ================================================= */
+
+.seasons-section{
+
+    margin-top:10px;
+
+}
+
+.section-title{
+
+    margin-bottom:30px;
+
+}
+
+.section-title h2{
+
+    font-size:2.2rem;
+
+    font-weight:900;
+
+    margin-bottom:6px;
+
+}
+
+.section-title span{
+
+    color:var(--muted);
+
+}
+
+/* ================================================= */
+/* CONTAINER */
+/* ================================================= */
+
+#seasonsContainer{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+/* ================================================= */
+/* SEASON CARD */
+/* ================================================= */
+
+.season-card{
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(20,29,44,.98),
+        rgba(11,17,27,.99)
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .06
+    );
+
+    border-radius:34px;
+
+    overflow:hidden;
+
+    box-shadow:
+    var(--shadow);
+
+    transition:.25s ease;
+
+}
+
+.season-card:hover{
+
+    border-color:
+    rgba(
+        255,
+        255,
+        255,
+        .12
+    );
+
+    transform:
+    translateY(-2px);
+
+}
+
+/* ================================================= */
+/* HEADER */
+/* ================================================= */
+
+.season-header{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr
+    auto
+    auto
+    auto;
+
+    gap:22px;
+
+    align-items:center;
+
+    padding:28px;
+
+    cursor:pointer;
+
+}
+
+.season-title{
+
+    font-size:1.35rem;
+
+    font-weight:800;
+
+}
+
+.season-info{
+
+    color:var(--muted);
+
+    margin-top:8px;
+
+}
+
+/* ================================================= */
+/* SEASON SCORE RING */
+/* ================================================= */
+
+.season-score-ring{
+
+    position:relative;
+
+    width:82px;
+
+    height:82px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.season-score-ring svg{
+
+    width:100%;
+    height:100%;
+
+    transform:
+    rotate(-90deg);
+
+}
+
+.season-score-ring .bg{
+
+    fill:none;
+
+    stroke:#222c38;
+
+    stroke-width:8;
+
+}
+
+.season-score-ring .progress{
+
+    fill:none;
+
+    stroke-width:8;
+
+    stroke-linecap:round;
+
+    transition:
+
+        stroke .35s ease,
+
+        stroke-dashoffset .5s ease,
+
+        filter .35s ease;
+
+}
+
+.season-score-ring span{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:1rem;
+
+    font-weight:900;
+
+    text-shadow:
+
+        0 0 10px rgba(255,255,255,.12);
+
+}
+
+/* ================================================= */
+/* STATUS */
+/* ================================================= */
+
+.season-status{
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:.78rem;
+
+    font-weight:800;
+
+    white-space:nowrap;
+
+}
+
+.season-status.complete{
+
+    background:
+    rgba(
+        74,
+        222,
+        128,
+        .12
+    );
+
+    color:#4ade80;
+
+    border:
+    1px solid rgba(
+        74,
+        222,
+        128,
+        .22
+    );
+
+}
+
+.season-status.partial{
+
+    background:
+    rgba(
+        139,
+        127,
+        255,
+        .12
+    );
+
+    color:#8b7fff;
+
+    border:
+    1px solid rgba(
+        139,
+        127,
+        255,
+        .22
+    );
+
+}
+
+/* ================================================= */
+/* HEATMAP */
+/* ================================================= */
+
+.season-heatmap{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    flex-wrap:wrap;
+
+    max-width:180px;
+
+}
+
+.heat-dot{
+
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    transition:.2s ease;
+
+}
+
+.heat-dot:hover{
+
+    transform:
+    scale(1.4);
+
+}
+
+/* ================================================= */
+/* ARROW */
+/* ================================================= */
+
+.season-arrow{
+
+    font-size:1.2rem;
+
+    color:var(--muted);
+
+    transition:.25s ease;
+
+}
+
+.season-card.open .season-arrow{
+
+    transform:
+    rotate(180deg);
+
+}
+
+/* ================================================= */
+/* EPISODES */
+/* ================================================= */
+
+.episodes{
+
+    display:none;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    padding:
+    0 28px
+    28px;
+
+}
+
+.episodes.active{
+
+    display:flex;
+
+}
+
+/* ================================================= */
+/* EPISODE CARD */
+/* ================================================= */
+
+.episode-card{
+
+    display:grid;
+
+    grid-template-columns:
+    260px
+    minmax(0,1fr)
+    130px;
+
+    gap:22px;
+
+    align-items:center;
+
+    padding:18px;
+
+    border-radius:24px;
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .06
+    );
+
+    background:
+    rgba(
+        255,
+        255,
+        255,
+        .03
+    );
+
+    transition:.25s ease;
+
+}
+
+.episode-card:hover{
+
+    transform:
+    translateY(-3px);
+
+    background:
+    rgba(
+        255,
+        255,
+        255,
+        .05
+    );
+
+}
+
+.episode-image{
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+}
+
+.episode-info{
+
+    min-width:0;
+
+}
+
+.episode-info h3{
+
+    font-size:1.08rem;
+
+    margin-bottom:10px;
+
+}
+
+.episode-info p{
+
+    color:var(--muted);
+
+    line-height:1.7;
+
+    font-size:.92rem;
+
+}
+
+.episode-meta{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    margin-top:14px;
+
+}
+
+.episode-tag{
+
+    padding:6px 10px;
+
+    border-radius:999px;
+
+    background:
+    rgba(
+        255,
+        255,
+        255,
+        .05
+    );
+
+    font-size:.75rem;
+
+}
+
+/* ================================================= */
+/* NOTE BUTTON */
+/* ================================================= */
+
+.episode-rating{
+
+    width:110px;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:20px;
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+    box-shadow:
+    0 10px 30px rgba(
+        0,
+        0,
+        0,
+        .25
+    );
+
+}
+
+.episode-rating:hover{
+
+    transform:
+    scale(1.05);
+
+}
+
+/* ================================================= */
+/* MODAL */
+/* ================================================= */
+
+.rating-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+    rgba(
+        0,
+        0,
+        0,
+        .8
+    );
+
+    backdrop-filter:
+    blur(14px);
+
+    z-index:9999;
+
+}
+
+.rating-modal.active{
+
+    display:flex;
+
+}
+
+.rating-content{
+
+    width:min(
+        820px,
+        92%
+    );
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(20,29,44,.98),
+        rgba(11,17,27,.99)
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .08
+    );
+
+    border-radius:34px;
+
+    padding:34px;
+
+    box-shadow:
+    0 30px 90px rgba(
+        0,
+        0,
+        0,
+        .55
+    );
+
+}
+
+.rating-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:24px;
+
+}
+
+.rating-header h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:1.25rem;
+
+}
+
+.rating-header i{
+
+    color:#facc15;
+
+}
+
+.close-rating{
+
+    width:48px;
+    height:48px;
+
+    border:none;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+    rgba(
+        255,
+        255,
+        255,
+        .05
+    );
+
+}
+
+.selected-rating{
+
+    text-align:center;
+
+    font-size:5.5rem;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+
+}
+
+.selected-rating-subtitle{
+
+    text-align:center;
+
+    color:var(--muted);
+
+    margin-bottom:28px;
+
+}
+
+/* ================================================= */
+/* RATING GRID */
+/* ================================================= */
+
+.rating-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        4,
+        1fr
+    );
+
+    gap:14px;
+
+}
+
+.rating-grid button{
+
+    height:64px;
+
+    border:none;
+
+    border-radius:18px;
+
+    font-size:1rem;
+
+    font-weight:800;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+
+}
+
+.rating-grid button:hover{
+
+    transform:
+    translateY(-2px);
+
+    filter:
+    brightness(1.08);
+
+}
+
+.rating-grid button.active{
+
+    outline:
+    3px solid white;
+
+}
+
+/* ================================================= */
+/* COLORS */
+/* ================================================= */
+
+.note-purple{
+
+    background:#8e44ad;
+
+}
+
+.note-orange{
+
+    background:#e67e22;
+
+}
+
+.note-dark-orange{
+
+    background:#d35400;
+
+}
+
+.note-yellow{
+
+    background:#f1c40f;
+
+    color:#111 !important;
+
+}
+
+.note-green{
+
+    background:#27ae60;
+
+}
+
+.note-dark-green{
+
+    background:#1e8449;
+
+}
+
+.note-blue{
+
+    background:#2980b9;
+
+}
+
+/* ================================================= */
+/* TOAST */
+/* ================================================= */
+
+.toast{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:30px;
+
+    padding:16px 24px;
+
+    border-radius:18px;
+
+    background:
+    rgba(
+        20,
+        29,
+        44,
+        .98
+    );
+
+    border:
+    1px solid rgba(
+        255,
+        255,
+        255,
+        .08
+    );
+
+    transform:
+    translateY(100px);
+
+    opacity:0;
+
+    transition:
+    transform .3s ease,
+    opacity .3s ease;
+
+    z-index:10000;
+
+}
+
+.toast.show{
+
+    transform:
+    translateY(0);
+
+    opacity:1;
+
+}
+
+/* ================================================= */
+/* ANIMATIONS */
+/* ================================================= */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
+
+}
+
+.score-card,
+.hero-side-card,
+.progress-card,
+.last-episode-card,
+.analysis-card,
+.legend-card,
+.season-card{
+
+    animation:
+    fadeUp .4s ease;
+
+}
+
+/* ================================================= */
+/* RESPONSIVE */
+/* ================================================= */
+
+@media(max-width:1250px){
+
+    .hero-content{
+
+        grid-template-columns:
+        260px
+        1fr;
+
+    }
+
+    .hero-side-column{
+
+        grid-column:
+        1 / -1;
+
+        display:grid;
+
+        grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    }
+
+}
+
+@media(max-width:950px){
+
+    .hero-content{
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        text-align:center;
+
+        padding-top:120px;
+
+    }
+
+    .poster{
+
+        width:240px;
+
+    }
+
+    .progress-section{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .legend-grid{
+
+        grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    }
+
+    .episode-card{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .episode-rating{
+
+        width:100%;
+
+    }
+
+}
+
+@media(max-width:650px){
+
+    .rating-grid{
+
+        grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    }
+
+    .legend-grid{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .selected-rating{
+
+        font-size:4rem;
+
+    }
+
+}
+
+/* ================================================= */
+/* RATING LEGEND */
+/* ================================================= */
+
+.rating-legend{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+
+.legend-pill{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:90px;
+
+    padding:10px 16px;
+
+    border-radius:14px;
+
+    font-size:.82rem;
+
+    font-weight:800;
+
+    box-shadow:none !important;
+
+    transform:none !important;
+
+}

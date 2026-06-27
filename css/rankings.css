@@ -1,0 +1,2211 @@
+/* ================================================= */
+/* ROOT */
+/* ================================================= */
+
+:root{
+
+    --bg:#060b12;
+
+    --card:#0d1328;
+
+    --card-hover:#141d3b;
+
+    --border:
+    rgba(
+        255,
+        255,
+        255,
+        .08
+    );
+
+    --text:#ffffff;
+
+    --text-soft:#9aa7c7;
+
+    --purple:#8b7fff;
+
+    --gold:#ffd76a;
+
+    --silver:#dce3f2;
+
+    --bronze:#d88a52;
+
+    --green:#35d17f;
+
+    --red:#ff5d73;
+
+    --radius:32px;
+
+    --shadow:
+
+    0 25px 80px
+
+    rgba(
+        0,
+        0,
+        0,
+        .45
+    );
+
+}
+
+/* ================================================= */
+/* RESET */
+/* ================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* ================================================= */
+/* BODY */
+/* ================================================= */
+
+body{
+
+    min-height:100vh;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #172238 0%,
+        #101722 30%,
+        #060b12 100%
+    );
+
+    color:var(--text);
+
+    font-family:
+    "Manrope",
+    sans-serif;
+
+    overflow-x:hidden;
+
+    position:relative;
+
+}
+
+/* ================================================= */
+/* PAGE */
+/* ================================================= */
+
+.rankings-page{
+
+    width:min(
+        1500px,
+        92%
+    );
+
+    margin:auto;
+
+    padding-bottom:100px;
+
+    position:relative;
+
+}
+
+/* ================================================= */
+/* BACKGROUND */
+/* ================================================= */
+
+.background-glow{
+
+    opacity:.45;
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-2;
+
+    pointer-events:none;
+
+    background-attachment:fixed;
+
+    background:
+
+    radial-gradient(
+
+        circle at 15% 10%,
+
+        rgba(
+            255,
+            215,
+            106,
+            .10
+        ),
+
+        transparent 30%
+
+    ),
+
+    radial-gradient(
+
+        circle at 85% 15%,
+
+        rgba(
+            139,
+            127,
+            255,
+            .18
+        ),
+
+        transparent 30%
+
+    ),
+
+    radial-gradient(
+
+        circle at 50% 100%,
+
+        rgba(
+            255,
+            215,
+            106,
+            .08
+        ),
+
+        transparent 45%
+
+    );
+
+}
+
+/* ================================================= */
+/* SVG */
+/* ================================================= */
+
+.podium-svg{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    pointer-events:none;
+
+    opacity:.08;
+
+}
+
+/* ================================================= */
+/* HERO */
+/* ================================================= */
+
+.rankings-header{
+
+    text-align:center;
+
+    margin-bottom:80px;
+
+}
+
+.rankings-tag{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:
+
+        12px
+        18px;
+
+    border-radius:
+        999px;
+
+    background:
+
+        rgba(
+            255,
+            215,
+            106,
+            .08
+        );
+
+    border:
+
+        1px solid
+
+        rgba(
+            255,
+            215,
+            106,
+            .25
+        );
+
+    color:
+        var(--gold);
+
+    font-size:.85rem;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    margin-bottom:30px;
+
+}
+
+.rankings-tag i{
+
+    animation:
+        crownFloat 3s ease infinite;
+
+}
+
+.rankings-header h1{
+
+    font-size:
+
+        clamp(
+            4rem,
+            8vw,
+            8rem
+        );
+
+    font-weight:900;
+
+    line-height:.9;
+
+    letter-spacing:-5px;
+
+    margin-bottom:25px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #ffffff,
+
+            #f8f0d1,
+
+            #ffd76a
+
+        );
+
+    background-clip:text;
+    -webkit-background-clip:text;
+
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+
+}
+
+.rankings-header p{
+
+    max-width:850px;
+
+    margin:auto;
+
+    color:
+        var(--text-soft);
+
+    line-height:1.9;
+
+    font-size:1.08rem;
+
+}
+
+.rankings-header::after{
+
+    content:"";
+
+    display:block;
+
+    width:240px;
+
+    height:2px;
+
+    margin:
+
+        35px auto 0;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            var(--gold),
+
+            transparent
+
+        );
+
+}
+
+/* ================================================= */
+/* OVERVIEW */
+/* ================================================= */
+
+.overview-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        4,
+        1fr
+    );
+
+    gap:24px;
+
+    margin-bottom:70px;
+
+}
+
+.overview-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px;
+
+    border-radius:
+        var(--radius);
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(
+                255,
+                255,
+                255,
+                .05
+            ),
+
+            rgba(
+                255,
+                255,
+                255,
+                .02
+            )
+
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        var(--shadow);
+
+    transition:
+        .3s ease;
+
+}
+
+.overview-card:hover{
+
+    transform:
+        translateY(-8px);
+
+}
+
+.overview-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-80px;
+    right:-80px;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(
+                255,
+                215,
+                106,
+                .12
+            ),
+
+            transparent
+
+        );
+
+}
+
+.overview-card i{
+
+    font-size:2rem;
+
+    color:
+        var(--gold);
+
+    margin-bottom:18px;
+
+}
+
+.overview-card strong{
+
+    display:block;
+
+    font-size:2.7rem;
+
+    font-weight:900;
+
+    margin-bottom:8px;
+
+}
+
+.overview-card span{
+
+    color:
+        var(--text-soft);
+
+}
+
+/* ================================================= */
+/* PODIUM */
+/* ================================================= */
+
+#podiumContainer{
+
+    margin-bottom:90px;
+
+}
+
+.podium{
+
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:
+
+        1fr
+        1.2fr
+        1fr;
+
+    gap:30px;
+
+    align-items:end;
+
+}
+
+/* ================================================= */
+/* PODIUM HALO */
+/* ================================================= */
+
+.podium::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    width:800px;
+    height:800px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(
+                255,
+                215,
+                106,
+                .10
+            ),
+
+            transparent 70%
+
+        );
+
+    pointer-events:none;
+
+    z-index:-1;
+
+}
+
+/* ================================================= */
+/* PODIUM CARD */
+/* ================================================= */
+
+.podium-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:36px;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            .04
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        var(--shadow);
+
+}
+
+/* ================================================= */
+/* POSTER */
+/* ================================================= */
+
+.podium-poster{
+
+    width:100%;
+
+    height:420px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+.podium-first .podium-poster{
+
+    height:520px;
+
+}
+
+/* ================================================= */
+/* GRADIENT */
+/* ================================================= */
+
+.podium-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            transparent 40%,
+
+            rgba(
+                0,
+                0,
+                0,
+                .8
+            ) 100%
+
+        );
+
+}
+
+/* ================================================= */
+/* CONTENT */
+/* ================================================= */
+
+.podium-content{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    padding:30px;
+
+    z-index:2;
+
+}
+
+/* ================================================= */
+/* RANK */
+/* ================================================= */
+
+.podium-rank{
+
+    font-size:4rem;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+
+}
+
+.podium-title{
+
+    font-size:1.5rem;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+
+}
+
+.podium-score{
+
+    font-size:1.8rem;
+
+    font-weight:800;
+
+}
+
+/* ================================================= */
+/* GOLD */
+/* ================================================= */
+
+.podium-first{
+
+    border:
+
+        1px solid
+
+        rgba(
+            255,
+            215,
+            106,
+            .35
+        );
+
+}
+
+.podium-first .podium-rank{
+
+    color:
+        var(--gold);
+
+}
+
+.podium-first::before{
+
+    content:"👑";
+
+    position:absolute;
+
+    top:20px;
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    font-size:3rem;
+
+    z-index:3;
+
+}
+
+/* ================================================= */
+/* SILVER */
+/* ================================================= */
+
+.podium-second .podium-rank{
+
+    color:
+        var(--silver);
+
+}
+
+/* ================================================= */
+/* BRONZE */
+/* ================================================= */
+
+.podium-third .podium-rank{
+
+    color:
+        var(--bronze);
+
+}
+
+/* ================================================= */
+/* FLOAT */
+/* ================================================= */
+
+@keyframes podiumFloat{
+
+    0%{
+
+        transform:
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+.podium-first{
+
+    animation:
+        podiumFloat
+        4s
+        ease
+        infinite;
+
+}
+
+/* ================================================= */
+/* SECTION */
+/* ================================================= */
+
+.ranking-section{
+
+    margin-bottom:90px;
+
+    position:relative;
+
+}
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    font-size:1.8rem;
+
+    font-weight:900;
+
+    margin-bottom:30px;
+
+}
+
+.section-title i{
+
+    color:
+        var(--gold);
+
+}
+
+.section-title::after{
+
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    margin-left:15px;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            rgba(
+                255,
+                215,
+                106,
+                .4
+            ),
+
+            transparent
+
+        );
+
+}
+
+/* ================================================= */
+/* TOP LIST */
+/* ================================================= */
+
+.ranking-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+}
+
+/* ================================================= */
+/* RANK CARD */
+/* ================================================= */
+
+.rank-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:grid;
+
+    grid-template-columns:
+
+        120px
+        90px
+        1fr
+        auto;
+
+    align-items:center;
+
+    gap:24px;
+
+    min-height:140px;
+
+    padding:18px;
+
+    border-radius:32px;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            rgba(
+                255,
+                255,
+                255,
+                .05
+            ),
+
+            rgba(
+                255,
+                255,
+                255,
+                .02
+            )
+
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+    backdrop-filter:
+        blur(20px);
+
+    transition:
+        .3s ease;
+
+}
+
+.rank-card:hover{
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+
+        rgba(
+            255,
+            215,
+            106,
+            .25
+        );
+
+}
+
+/* ================================================= */
+/* POSITION */
+/* ================================================= */
+
+.rank-position{
+
+    width:80px;
+    height:80px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:1.8rem;
+
+    font-weight:900;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            .05
+        );
+
+}
+
+.rank-1 .rank-position{
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #fff0b6,
+
+            #ffd76a
+
+        );
+
+    color:#111;
+
+}
+
+.rank-2 .rank-position{
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #eef2fb,
+
+            #dce3f2
+
+        );
+
+    color:#111;
+
+}
+
+.rank-3 .rank-position{
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #efbf9d,
+
+            #d88a52
+
+        );
+
+    color:#111;
+
+}
+
+/* ================================================= */
+/* POSTER */
+/* ================================================= */
+
+.rank-poster{
+
+    width:90px;
+
+    height:120px;
+
+    border-radius:18px;
+
+    object-fit:cover;
+
+    box-shadow:
+
+        0 10px 30px
+
+        rgba(
+            0,
+            0,
+            0,
+            .35
+        );
+
+}
+
+/* ================================================= */
+/* CONTENT */
+/* ================================================= */
+
+.rank-content{
+
+    min-width:0;
+
+}
+
+.rank-content h3{
+
+    font-size:1.25rem;
+
+    font-weight:900;
+
+    margin-bottom:8px;
+
+}
+
+.rank-content p{
+
+    color:
+        var(--text-soft);
+
+    line-height:1.7;
+
+}
+
+/* ================================================= */
+/* SCORE */
+/* ================================================= */
+
+.rank-score{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:2rem;
+
+    font-weight:900;
+
+    color:
+        var(--gold);
+
+}
+
+.rank-score i{
+
+    font-size:1.2rem;
+
+}
+
+/* ================================================= */
+/* SHINE */
+/* ================================================= */
+
+.rank-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:80%;
+
+    height:100%;
+
+    transform:
+        skewX(-25deg);
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            rgba(
+                255,
+                255,
+                255,
+                .08
+            ),
+
+            transparent
+
+        );
+
+}
+
+.rank-card:hover::before{
+
+    animation:
+        shine .8s ease;
+
+}
+
+@keyframes shine{
+
+    from{
+
+        left:-120%;
+
+    }
+
+    to{
+
+        left:150%;
+
+    }
+
+}
+
+/* ================================================= */
+/* MOUNT RUSHMORE */
+/* ================================================= */
+
+.rushmore-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(
+            4,
+            1fr
+        );
+
+    gap:28px;
+
+}
+
+/* ================================================= */
+/* RUSHMORE CARD */
+/* ================================================= */
+
+.rushmore-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    height:600px;
+
+    border-radius:36px;
+
+    background:#111;
+
+    border:
+
+        1px solid
+
+        rgba(
+            255,
+            255,
+            255,
+            .08
+        );
+
+    box-shadow:
+        var(--shadow);
+
+    transition:
+        .4s ease;
+
+}
+
+.rushmore-card:hover{
+
+    transform:
+
+        translateY(-10px)
+
+        scale(1.02);
+
+}
+
+/* ================================================= */
+/* POSTER */
+/* ================================================= */
+
+.rushmore-poster{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+/* ================================================= */
+/* OVERLAY */
+/* ================================================= */
+
+.rushmore-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            transparent 20%,
+
+            rgba(
+                0,
+                0,
+                0,
+                .15
+            ) 40%,
+
+            rgba(
+                0,
+                0,
+                0,
+                .92
+            ) 100%
+
+        );
+
+    z-index:1;
+
+}
+
+/* ================================================= */
+/* RANK NUMBER */
+/* ================================================= */
+
+.rushmore-rank{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:3;
+
+    font-size:1.8rem;
+
+    font-weight:900;
+
+}
+
+/* ================================================= */
+/* TOP 1 */
+/* ================================================= */
+
+.rushmore-1 .rushmore-rank{
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #fff0b6,
+
+            #ffd76a
+
+        );
+
+    color:#111;
+
+    box-shadow:
+
+        0 0 40px
+
+        rgba(
+            255,
+            215,
+            106,
+            .35
+        );
+
+}
+
+/* ================================================= */
+/* TOP 2 */
+/* ================================================= */
+
+.rushmore-2 .rushmore-rank{
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #eef2fb,
+
+            #dce3f2
+
+        );
+
+    color:#111;
+
+}
+
+/* ================================================= */
+/* TOP 3 */
+/* ================================================= */
+
+.rushmore-3 .rushmore-rank{
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #efbf9d,
+
+            #d88a52
+
+        );
+
+    color:#111;
+
+}
+
+/* ================================================= */
+/* TOP 4 */
+/* ================================================= */
+
+.rushmore-4 .rushmore-rank{
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            .12
+        );
+
+    border:
+
+        1px solid
+
+        rgba(
+            255,
+            255,
+            255,
+            .1
+        );
+
+}
+
+/* ================================================= */
+/* CONTENT */
+/* ================================================= */
+
+.rushmore-content{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    padding:30px;
+
+    z-index:2;
+
+}
+
+.rushmore-content h3{
+
+    font-size:1.8rem;
+
+    font-weight:900;
+
+    margin-bottom:12px;
+
+}
+
+.rushmore-content p{
+
+    color:
+        var(--text-soft);
+
+    line-height:1.7;
+
+}
+
+.rushmore-score{
+
+    margin-top:18px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:
+
+        12px
+        18px;
+
+    border-radius:
+        999px;
+
+    background:
+
+        rgba(
+            255,
+            215,
+            106,
+            .12
+        );
+
+    color:
+        var(--gold);
+
+    font-weight:900;
+
+}
+
+/* ================================================= */
+/* GOLD HALO */
+/* ================================================= */
+
+.rushmore-1::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120px;
+    right:-120px;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(
+                255,
+                215,
+                106,
+                .22
+            ),
+
+            transparent
+
+        );
+
+    z-index:1;
+
+}
+
+/* ================================================= */
+/* FLOAT */
+/* ================================================= */
+
+@keyframes rushmoreFloat{
+
+    0%{
+
+        transform:
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+.rushmore-1{
+
+    animation:
+
+        rushmoreFloat
+
+        5s
+
+        ease
+
+        infinite;
+
+}
+
+/* ================================================= */
+/* MASTERPIECES */
+/* ================================================= */
+
+.ranking-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(
+            auto-fill,
+            minmax(
+                340px,
+                1fr
+            )
+        );
+
+    gap:24px;
+
+}
+
+.masterpiece-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:32px;
+
+    border-radius:32px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(
+                255,
+                215,
+                106,
+                .14
+            ),
+
+            rgba(
+                255,
+                255,
+                255,
+                .03
+            )
+
+        );
+
+    border:
+
+        1px solid
+
+        rgba(
+            255,
+            215,
+            106,
+            .22
+        );
+
+    backdrop-filter:
+        blur(20px);
+
+    transition:
+        .3s ease;
+
+}
+
+.masterpiece-card:hover{
+
+    transform:
+        translateY(-8px);
+
+}
+
+.masterpiece-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-100px;
+    right:-100px;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(
+                255,
+                215,
+                106,
+                .18
+            ),
+
+            transparent
+
+        );
+
+}
+
+.masterpiece-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:
+
+        10px
+        16px;
+
+    border-radius:
+        999px;
+
+    margin-bottom:20px;
+
+    background:
+
+        rgba(
+            255,
+            215,
+            106,
+            .10
+        );
+
+    color:
+        var(--gold);
+
+    font-weight:800;
+
+}
+
+.masterpiece-card h3{
+
+    font-size:1.4rem;
+
+    font-weight:900;
+
+    margin-bottom:12px;
+
+}
+
+.masterpiece-card p{
+
+    color:
+        var(--text-soft);
+
+    line-height:1.8;
+
+}
+
+/* ================================================= */
+/* DISAPPOINTMENTS */
+/* ================================================= */
+
+.disappointment-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px;
+
+    border-radius:30px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            rgba(
+                255,
+                93,
+                115,
+                .12
+            ),
+
+            rgba(
+                255,
+                255,
+                255,
+                .03
+            )
+
+        );
+
+    border:
+
+        1px solid
+
+        rgba(
+            255,
+            93,
+            115,
+            .20
+        );
+
+    transition:
+        .3s ease;
+
+}
+
+.disappointment-card:hover{
+
+    transform:
+        translateY(-8px);
+
+}
+
+.disappointment-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-80px;
+    right:-80px;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(
+                255,
+                93,
+                115,
+                .15
+            ),
+
+            transparent
+
+        );
+
+}
+
+.disappointment-card h3{
+
+    font-size:1.25rem;
+
+    font-weight:900;
+
+    margin-bottom:12px;
+
+}
+
+.disappointment-card p{
+
+    color:
+        var(--text-soft);
+
+    margin-bottom:8px;
+
+}
+
+/* ================================================= */
+/* EMPTY STATE */
+/* ================================================= */
+
+.empty-ranking{
+
+    text-align:center;
+
+    padding:80px 40px;
+
+    border-radius:36px;
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            .03
+        );
+
+    border:
+        1px solid
+        var(--border);
+
+}
+
+.empty-ranking i{
+
+    font-size:3rem;
+
+    color:
+        var(--gold);
+
+    margin-bottom:20px;
+
+}
+
+.empty-ranking h3{
+
+    font-size:1.5rem;
+
+    margin-bottom:10px;
+
+}
+
+.empty-ranking p{
+
+    color:
+        var(--text-soft);
+
+}
+
+/* ================================================= */
+/* ANIMATIONS */
+/* ================================================= */
+
+@keyframes crownFloat{
+
+    0%{
+
+        transform:
+            translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+.overview-card,
+.rank-card,
+.masterpiece-card,
+.disappointment-card,
+.rushmore-card{
+
+    animation:
+
+        fadeUp
+
+        .6s
+
+        ease;
+
+}
+
+/* ================================================= */
+/* SCROLLBAR */
+/* ================================================= */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:
+        transparent;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:
+
+        rgba(
+            255,
+            215,
+            106,
+            .25
+        );
+
+    border-radius:
+        999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:
+
+        rgba(
+            255,
+            215,
+            106,
+            .45
+        );
+
+}
+
+/* ================================================= */
+/* RESPONSIVE */
+/* ================================================= */
+
+@media(max-width:1400px){
+
+    .rushmore-grid{
+
+        grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    }
+
+}
+
+@media(max-width:1200px){
+
+    .overview-grid{
+
+        grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    }
+
+}
+
+@media(max-width:1000px){
+
+    .podium{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .podium-first{
+
+        order:-1;
+
+    }
+
+    .rank-card{
+
+        grid-template-columns:
+
+            70px
+            80px
+            1fr;
+
+    }
+
+    .rank-score{
+
+        grid-column:
+        1 / -1;
+
+        margin-top:12px;
+
+    }
+
+}
+
+@media(max-width:700px){
+
+    .overview-grid{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .rushmore-grid{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .ranking-grid{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .rankings-header h1{
+
+        font-size:3rem;
+
+    }
+
+    .rank-card{
+
+        grid-template-columns:
+        1fr;
+
+        text-align:center;
+
+    }
+
+    .rank-position{
+
+        margin:auto;
+
+    }
+
+    .rank-poster{
+
+        margin:auto;
+
+    }
+
+    .rank-score{
+
+        justify-content:center;
+
+    }
+
+}
+
+.rankings-page a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+}
+
+.rankings-page a:visited{
+
+    color:inherit;
+
+}
+
+.rankings-page a:hover{
+
+    color:inherit;
+
+}
+
+.rankings-page a:active{
+
+    color:inherit;
+
+}
+
+.sidebar-logo{
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-weight:800;
+
+}

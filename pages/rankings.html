@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        BingeRate • Hall of Fame
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="../css/sidebar.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/rankings.css"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="background-glow"></div>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <a
+            href="../index.html"
+            class="sidebar-logo"
+        >
+
+            <div
+                class="sidebar-logo-icon"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-tv
+                    "
+                ></i>
+
+            </div>
+
+            <span>
+
+                BingeRate
+
+            </span>
+
+        </a>
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="../index.html"
+                class="nav-link"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-house
+                    "
+                ></i>
+
+                <span>
+
+                    Accueil
+
+                </span>
+
+            </a>
+
+            <a
+                href="series.html"
+                class="nav-link"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-film
+                    "
+                ></i>
+
+                <span>
+
+                    Séries
+
+                </span>
+
+            </a>
+
+            <a
+                href="calendar.html"
+                class="nav-link"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-calendar-days
+                    "
+                ></i>
+
+                <span>
+
+                    Calendrier
+
+                </span>
+
+            </a>
+
+            <a
+                href="stats.html"
+                class="nav-link"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-chart-line
+                    "
+                ></i>
+
+                <span>
+
+                    Statistiques
+
+                </span>
+
+            </a>
+
+            <a
+                href="rankings.html"
+                class="nav-link active"
+            >
+
+                <i
+                    class="
+                    fa-solid
+                    fa-trophy
+                    "
+                ></i>
+
+                <span>
+
+                    Classements
+
+                </span>
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="rankings-page">
+
+        <!-- SVG DECOR -->
+
+        <svg
+            class="podium-svg"
+            viewBox="0 0 1600 800"
+            preserveAspectRatio="none"
+        >
+
+            <path
+                d="M0 400 Q 800 0 1600 400"
+                fill="none"
+                stroke="white"
+                stroke-width="2"
+            />
+
+            <path
+                d="M0 500 Q 800 150 1600 500"
+                fill="none"
+                stroke="white"
+                stroke-width="1"
+            />
+
+        </svg>
+
+        <!-- HERO -->
+
+        <section class="rankings-header">
+
+            <div class="rankings-tag">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-crown
+                    "
+                ></i>
+
+                HALL OF FAME
+
+            </div>
+
+            <h1>
+
+                Hall of Fame
+
+            </h1>
+
+            <p>
+
+                Les meilleures séries,
+                les saisons les plus marquantes
+                et les véritables chefs-d'œuvre
+                de ta bibliothèque.
+
+            </p>
+
+        </section>
+
+        <!-- OVERVIEW -->
+
+        <section
+            id="overview"
+            class="overview-grid"
+        >
+
+            <div class="overview-card">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-tv
+                    "
+                ></i>
+
+                <strong
+                    id="totalRankedSeries"
+                >
+
+                    —
+
+                </strong>
+
+                <span>
+
+                    Séries classées
+
+                </span>
+
+            </div>
+
+            <div class="overview-card">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-star
+                    "
+                ></i>
+
+                <strong
+                    id="averageScore"
+                >
+
+                    —
+
+                </strong>
+
+                <span>
+
+                    Moyenne générale
+
+                </span>
+
+            </div>
+
+            <div class="overview-card">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-crown
+                    "
+                ></i>
+
+                <strong
+                    id="masterpiecesCount"
+                >
+
+                    —
+
+                </strong>
+
+                <span>
+
+                    Chefs-d'œuvre
+
+                </span>
+
+            </div>
+
+            <div class="overview-card">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-fire
+                    "
+                ></i>
+
+                <strong
+                    id="perfectEpisodes"
+                >
+
+                    —
+
+                </strong>
+
+                <span>
+
+                    Notes parfaites
+
+                </span>
+
+            </div>
+
+        </section>
+
+        <!-- PODIUM -->
+
+        <section
+            id="podiumContainer"
+        ></section>
+
+        <!-- TOP SERIES -->
+
+        <section class="ranking-section">
+
+            <div class="section-title">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-trophy
+                    "
+                ></i>
+
+                Top Séries
+
+            </div>
+
+            <div
+                id="topSeries"
+                class="ranking-list"
+            ></div>
+
+        </section>
+
+        <!-- TOP SEASONS -->
+
+        <section class="ranking-section">
+
+            <div class="section-title">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-medal
+                    "
+                ></i>
+
+                Top Saisons
+
+            </div>
+
+            <div
+                id="topSeasons"
+                class="ranking-list"
+            ></div>
+
+        </section>
+
+        <!-- MOUNT RUSHMORE -->
+
+        <section class="ranking-section">
+
+            <div class="section-title">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-mountain
+                    "
+                ></i>
+
+                Mount Rushmore
+
+            </div>
+
+            <div
+                id="mountRushmore"
+                class="rushmore-grid"
+            ></div>
+
+        </section>
+
+        <!-- MASTERPIECES -->
+
+        <section class="ranking-section">
+
+            <div class="section-title">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-crown
+                    "
+                ></i>
+
+                Chefs-d'œuvre
+
+            </div>
+
+            <div
+                id="masterpieces"
+                class="ranking-grid"
+            ></div>
+
+        </section>
+
+        <!-- DISAPPOINTMENTS -->
+
+        <section class="ranking-section">
+
+            <div class="section-title">
+
+                <i
+                    class="
+                    fa-solid
+                    fa-face-frown
+                    "
+                ></i>
+
+                Déceptions
+
+            </div>
+
+            <div
+                id="disappointments"
+                class="ranking-grid"
+            ></div>
+
+        </section>
+
+    </main>
+
+    <script src="../config.js"></script>
+
+    <script src="../js/rankings.js"></script>
+
+</body>
+
+</html>
