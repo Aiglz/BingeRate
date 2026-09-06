@@ -156,8 +156,10 @@ const modalLoading =
 
 const SERIES_PER_PAGE = 24;
 
+// Cache de 6 heures
+
 const CACHE_DURATION =
-    7 * 24 * 60 * 60 * 1000;
+    6 * 60 * 60 * 1000;
 
 // ======================================================
 // STATE
@@ -497,12 +499,22 @@ async function fetchTMDB(url){
 // SHOW DETAILS
 // ======================================================
 
-async function getShowDetails(id){
+async function getShowDetails(
+    id,
+    forceRefresh = false
+){
 
     const cache =
         getSeriesCache();
 
-    if(cache[id]){
+    // ==========================================
+    // CACHE
+    // ==========================================
+
+    if(
+        !forceRefresh &&
+        cache[id]
+    ){
 
         const age =
 
@@ -520,6 +532,10 @@ async function getShowDetails(id){
 
     }
 
+    // ==========================================
+    // SHOW
+    // ==========================================
+
     const show =
 
         await fetchTMDB(
@@ -530,15 +546,33 @@ async function getShowDetails(id){
 
     if(!show){
 
+        if(cache[id]){
+
+            return cache[id];
+
+        }
+
         return{
 
             seasons:0,
+
             episodes:0,
-            tmdb:0
+
+            tmdb:0,
+
+            status:null,
+
+            nextEpisode:null,
+
+            updatedAt:Date.now()
 
         };
 
     }
+
+    // ==========================================
+    // EPISODES SORTIS
+    // ==========================================
 
     let releasedEpisodes = 0;
 
@@ -551,17 +585,21 @@ async function getShowDetails(id){
 
         of
 
-        show.seasons
+        (show.seasons || [])
 
     ){
+
+        // Saison spéciale
 
         if(
 
             season.season_number === 0
 
-        )
+        ){
 
             continue;
+
+        }
 
         const seasonData =
 
@@ -571,12 +609,15 @@ async function getShowDetails(id){
 
             );
 
-        if(!seasonData)
+        if(!seasonData){
+
             continue;
+
+        }
 
         releasedEpisodes +=
 
-            seasonData.episodes
+            (seasonData.episodes || [])
 
             .filter(
 
@@ -594,16 +635,26 @@ async function getShowDetails(id){
 
     }
 
+    // ==========================================
+    // DETAILS
+    // ==========================================
+
     const details={
 
         seasons:
-            show.number_of_seasons,
+            show.number_of_seasons || 0,
 
         episodes:
             releasedEpisodes,
 
         tmdb:
-            show.vote_average,
+            show.vote_average || 0,
+
+        status:
+            show.status || null,
+
+        nextEpisode:
+            show.next_episode_to_air || null,
 
         updatedAt:
             Date.now()
@@ -624,7 +675,9 @@ async function getShowDetails(id){
 // LIBRARY ENRICHMENT
 // ======================================================
 
-async function enrichLibrary(){
+async function enrichLibrary(
+    forceRefresh = false
+){
 
     let updated = false;
 
@@ -638,34 +691,96 @@ async function enrichLibrary(){
 
     ){
 
-        if(
-
-            show.seasons &&
-            show.episodes &&
-            show.tmdb
-
-        )
-
-            continue;
+        /*
+         * On récupère les informations actuelles
+         * de TMDB pour chaque série.
+         *
+         * Au premier chargement, forceRefresh = true.
+         * Cela permet de détecter immédiatement les
+         * nouvelles saisons et les nouveaux épisodes.
+         */
 
         const details =
 
             await getShowDetails(
-                show.id
+
+                show.id,
+
+                forceRefresh
+
             );
 
-        show.seasons =
-            details.seasons;
+        if(!details){
 
-        show.episodes =
-            details.episodes;
+            continue;
 
-        show.tmdb =
-            details.tmdb;
+        }
 
-        updated = true;
+        // ==========================================
+        // MISE À JOUR DES INFORMATIONS
+        // ==========================================
+
+        if(
+
+            show.seasons !==
+            details.seasons
+
+            ||
+
+            show.episodes !==
+            details.episodes
+
+            ||
+
+            show.tmdb !==
+            details.tmdb
+
+            ||
+
+            show.tmdbStatus !==
+            details.status
+
+        ){
+
+            show.seasons =
+                details.seasons;
+
+            show.episodes =
+                details.episodes;
+
+            show.tmdb =
+                details.tmdb;
+
+            show.tmdbStatus =
+                details.status || null;
+
+            updated = true;
+
+        }
+
+        // ==========================================
+        // PROCHAIN ÉPISODE
+        // ==========================================
+
+        if(
+
+            show.nextEpisode !==
+            details.nextEpisode
+
+        ){
+
+            show.nextEpisode =
+                details.nextEpisode;
+
+            updated = true;
+
+        }
 
     }
+
+    // ==========================================
+    // SAUVEGARDE
+    // ==========================================
 
     if(updated){
 
@@ -1049,11 +1164,18 @@ function getSeriesProgress(show){
 
 function getSeriesStatus(show){
 
+    const notes =
+        getSeriesNotes(show.id);
+
     const progress =
         getSeriesProgress(show);
 
     const score =
         getSeriesAverage(show.id);
+
+    // ==========================================
+    // CHEF-D'ŒUVRE
+    // ==========================================
 
     if(
 
@@ -1061,7 +1183,7 @@ function getSeriesStatus(show){
 
         &&
 
-        getSeriesNotes(show.id).length>=10
+        notes.length>=10
 
     ){
 
@@ -1075,6 +1197,10 @@ function getSeriesStatus(show){
 
     }
 
+    // ==========================================
+    // À COMMENCER
+    // ==========================================
+
     if(progress===0){
 
         return{
@@ -1087,7 +1213,19 @@ function getSeriesStatus(show){
 
     }
 
-    if(progress>=100){
+    // ==========================================
+    // TERMINÉE
+    // ==========================================
+
+    if(
+
+        progress>=100
+
+        &&
+
+        show.episodes
+
+    ){
 
         return{
 
@@ -1098,6 +1236,10 @@ function getSeriesStatus(show){
         };
 
     }
+
+    // ==========================================
+    // EN COURS
+    // ==========================================
 
     return{
 
@@ -2164,7 +2306,11 @@ async function addToLibrary(show){
     const details =
 
         await getShowDetails(
-            show.id
+
+            show.id,
+
+            true
+
         );
 
     library.unshift({
@@ -2205,6 +2351,12 @@ async function addToLibrary(show){
 
         tmdb:
             details.tmdb,
+
+        tmdbStatus:
+            details.status || null,
+
+        nextEpisode:
+            details.nextEpisode || null,
 
         addedAt:
             Date.now()
@@ -2636,7 +2788,16 @@ async function loadPage(){
 
     refreshStorage();
 
-    await enrichLibrary();
+    /*
+     * IMPORTANT :
+     * On force ici la récupération TMDB.
+     *
+     * Cela actualise immédiatement les séries
+     * déjà présentes dans la bibliothèque, y compris
+     * celles qui étaient précédemment à 100 %.
+     */
+
+    await enrichLibrary(true);
 
     refreshStorage();
 
