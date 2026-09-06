@@ -687,120 +687,87 @@ async function getShowDetails(
 // LIBRARY ENRICHMENT
 // ======================================================
 
-async function enrichLibrary(
-    forceRefresh = false
-){
+async function enrichLibrary(forceRefresh = false){
+
+    refreshStorage();
 
     let updated = false;
 
-    for(
-
-        const show
-
-        of
-
-        library
-
-    ){
+    for(const show of library){
 
         try{
 
+            console.log(
+                `🔄 Mise à jour de ${show.name} (TMDB ${show.id})`
+            );
+
             const details =
-
                 await getShowDetails(
-
                     show.id,
-
                     forceRefresh
-
                 );
 
             if(!details){
+
+                console.warn(
+                    `⚠️ Impossible de récupérer ${show.name}`
+                );
 
                 continue;
 
             }
 
-            // ======================================
-            // INFORMATIONS TMDB
-            // ======================================
-
-            if(
-
-                show.seasons !==
-                details.seasons
-
-                ||
-
-                show.episodes !==
-                details.episodes
-
-                ||
-
-                show.tmdb !==
-                details.tmdb
-
-                ||
-
-                show.tmdbStatus !==
-                details.status
-
-            ){
-
-                show.seasons =
-                    details.seasons;
-
-                show.episodes =
-                    details.episodes;
-
-                show.tmdb =
-                    details.tmdb;
-
-                show.tmdbStatus =
-                    details.status || null;
-
-                updated = true;
-
-            }
+            console.log(
+                `✅ ${show.name} :`,
+                details
+            );
 
             // ======================================
-            // PROCHAIN ÉPISODE
+            // TOUJOURS mettre à jour les données TMDB
             // ======================================
 
-            if(
+            show.seasons =
+                details.seasons;
 
-                show.nextEpisode !==
-                details.nextEpisode
+            show.episodes =
+                details.episodes;
 
-            ){
+            show.tmdb =
+                details.tmdb;
 
-                show.nextEpisode =
-                    details.nextEpisode;
+            show.tmdbStatus =
+                details.status || null;
 
-                updated = true;
+            show.nextEpisode =
+                details.nextEpisode || null;
 
-            }
+            updated = true;
 
         }
 
         catch(error){
 
             console.error(
-
-                `Erreur mise à jour ${show.name}:`,
-
+                `❌ Erreur mise à jour ${show.name}:`,
                 error
-
             );
 
         }
 
     }
 
+    // ==========================================
+    // SAUVEGARDE
+    // ==========================================
+
     if(updated){
 
         saveLibrary(
             library
+        );
+
+        console.log(
+            "💾 Bibliothèque TMDB mise à jour"
         );
 
     }
@@ -2803,36 +2770,13 @@ async function loadPage(){
 
     refreshStorage();
 
-    /*
-     * IMPORTANT :
-     *
-     * On force une actualisation complète au chargement.
-     *
-     * Cela permet de détecter immédiatement une nouvelle
-     * saison pour une série qui était déjà terminée.
-     *
-     * Exemple :
-     *
-     * Reacher
-     * Ancien stockage : 24 épisodes / 3 saisons
-     *
-     * TMDB :
-     * Nouvelle saison disponible
-     *
-     * Nouveau stockage :
-     * 30 épisodes / 4 saisons
-     *
-     * Progression :
-     * 24 / 30 = 80 %
-     *
-     * Statut :
-     * En cours
-     */
-
-    await enrichLibrary(
-        true
+    console.log(
+        "🚀 Mise à jour automatique de la bibliothèque..."
     );
 
+    await enrichLibrary(true);
+
+    // Relit le localStorage après la mise à jour
     refreshStorage();
 
     currentLibrary =
