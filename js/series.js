@@ -3,152 +3,93 @@
 // ======================================================
 
 // Hero
-
 const addSeriesBtn =
-    document.getElementById(
-        "addSeriesBtn"
-    );
+    document.getElementById("addSeriesBtn");
 
 // Search
-
 const resultsSection =
-    document.getElementById(
-        "resultsSection"
-    );
+    document.getElementById("resultsSection");
 
 const results =
-    document.getElementById(
-        "results"
-    );
+    document.getElementById("results");
 
 const resultsCount =
-    document.getElementById(
-        "resultsCount"
-    );
+    document.getElementById("resultsCount");
 
 const searchInput =
-    document.getElementById(
-        "searchInput"
-    );
+    document.getElementById("searchInput");
 
 const searchBtn =
-    document.getElementById(
-        "searchBtn"
-    );
+    document.getElementById("searchBtn");
 
 // Collection
-
 const mySeries =
-    document.getElementById(
-        "mySeries"
-    );
+    document.getElementById("mySeries");
 
 const collectionSearch =
-    document.getElementById(
-        "collectionSearch"
-    );
+    document.getElementById("collectionSearch");
 
 const sortButton =
-    document.getElementById(
-        "sortButton"
-    );
+    document.getElementById("sortButton");
 
 const addSeriesCard =
-    document.getElementById(
-        "addSeriesCard"
-    );
+    document.getElementById("addSeriesCard");
 
 const loadMoreTrigger =
-    document.getElementById(
-        "loadMoreTrigger"
-    );
+    document.getElementById("loadMoreTrigger");
 
 // Dashboard
-
 const seriesCount =
-    document.getElementById(
-        "seriesCount"
-    );
+    document.getElementById("seriesCount");
 
 const episodesCount =
-    document.getElementById(
-        "episodesCount"
-    );
+    document.getElementById("episodesCount");
 
 const episodesTotal =
-    document.getElementById(
-        "episodesTotal"
-    );
+    document.getElementById("episodesTotal");
 
 const globalAverage =
-    document.getElementById(
-        "globalAverage"
-    );
+    document.getElementById("globalAverage");
 
 const masterpiecesCount =
-    document.getElementById(
-        "masterpiecesCount"
-    );
+    document.getElementById("masterpiecesCount");
 
 const dashboardProgress =
-    document.getElementById(
-        "dashboardProgress"
-    );
+    document.getElementById("dashboardProgress");
 
 const dashboardProgressCircle =
-    document.getElementById(
-        "dashboardProgressCircle"
-    );
+    document.getElementById("dashboardProgressCircle");
 
 // Filters
-
 const filterButtons =
-    document.querySelectorAll(
-        ".filter-chip"
-    );
+    document.querySelectorAll(".filter-chip");
 
 // Recent
-
 const recentSearches =
-    document.getElementById(
-        "recentSearches"
-    );
+    document.getElementById("recentSearches");
 
 const clearRecent =
-    document.getElementById(
-        "clearRecent"
-    );
+    document.getElementById("clearRecent");
 
 const discoverBtn =
-    document.getElementById(
-        "discoverBtn"
-    );
+    document.getElementById("discoverBtn");
 
 // Toast
-
 const toast =
-    document.getElementById(
-        "toast"
-    );
+    document.getElementById("toast");
 
 // ======================================================
 // MODAL
 // ======================================================
 
 const addSeriesModal =
-    document.getElementById(
-        "addSeriesModal"
-    );
+    document.getElementById("addSeriesModal");
 
 const closeModal =
-    document.getElementById(
-        "closeModal"
-    );
+    document.getElementById("closeModal");
 
 const modalLoading =
-    document.getElementById(
-        "modalLoading"
-    );
+    document.getElementById("modalLoading");
 
 // ======================================================
 // CONFIG
@@ -156,10 +97,17 @@ const modalLoading =
 
 const SERIES_PER_PAGE = 24;
 
-// Cache de 6 heures
-
+// Cache valable 6 heures
 const CACHE_DURATION =
     6 * 60 * 60 * 1000;
+
+// IMPORTANT
+// On change cette valeur lorsqu'on modifie la structure
+// ou la logique des données du cache.
+//
+// Si l'ancien cache possède une autre version,
+// il sera automatiquement supprimé.
+const CACHE_VERSION = 2;
 
 // ======================================================
 // STATE
@@ -235,9 +183,7 @@ function getRecentSearches(){
 
 }
 
-function saveRecentSearches(
-    searches
-){
+function saveRecentSearches(searches){
 
     localStorage.setItem(
 
@@ -249,21 +195,88 @@ function saveRecentSearches(
 
 }
 
+// ======================================================
+// CACHE
+// ======================================================
+
 function getSeriesCache(){
 
-    return JSON.parse(
+    try{
 
-        localStorage.getItem(
+        const stored =
+
+            JSON.parse(
+
+                localStorage.getItem(
+                    "bingeRateSeriesCache"
+                )
+
+            );
+
+        if(!stored){
+
+            return {};
+
+        }
+
+        /*
+         * Ancien format :
+         *
+         * {
+         *     "123": {
+         *         seasons: 3,
+         *         episodes: 24
+         *     }
+         * }
+         *
+         * Nouveau format :
+         *
+         * {
+         *     "_version": 2,
+         *     "123": {
+         *         ...
+         *     }
+         * }
+         */
+
+        if(
+            stored._version !==
+            CACHE_VERSION
+        ){
+
+            localStorage.removeItem(
+                "bingeRateSeriesCache"
+            );
+
+            return {};
+
+        }
+
+        return stored;
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Erreur cache TMDB :",
+            error
+        );
+
+        localStorage.removeItem(
             "bingeRateSeriesCache"
-        )
+        );
 
-    ) || {};
+        return {};
+
+    }
 
 }
 
-function saveSeriesCache(
-    cache
-){
+function saveSeriesCache(cache){
+
+    cache._version =
+        CACHE_VERSION;
 
     localStorage.setItem(
 
@@ -319,11 +332,8 @@ function clamp(
 }
 
 function getProgress(
-
     watched,
-
     total
-
 ){
 
     if(!total)
@@ -334,13 +344,10 @@ function getProgress(
         (
 
             watched
-
             /
-
             total
 
         )
-
         *100
 
     );
@@ -361,7 +368,6 @@ function debounce(
         );
 
         timeout =
-
             setTimeout(
 
                 ()=>{
@@ -411,9 +417,7 @@ function showToast(message){
 
 }
 
-function scrollToSection(
-    section
-){
+function scrollToSection(section){
 
     section.scrollIntoView({
 
@@ -431,9 +435,7 @@ function createElement(
 ){
 
     const element =
-        document.createElement(
-            tag
-        );
+        document.createElement(tag);
 
     if(className){
 
@@ -474,9 +476,7 @@ async function fetchTMDB(url){
         if(!response.ok){
 
             throw new Error(
-
                 `TMDB ${response.status}`
-
             );
 
         }
@@ -512,8 +512,11 @@ async function getShowDetails(
     // ==========================================
 
     if(
+
         !forceRefresh &&
+
         cache[id]
+
     ){
 
         const age =
@@ -533,7 +536,7 @@ async function getShowDetails(
     }
 
     // ==========================================
-    // SHOW
+    // SHOW PRINCIPAL
     // ==========================================
 
     const show =
@@ -589,8 +592,7 @@ async function getShowDetails(
 
     ){
 
-        // Saison spéciale
-
+        // Saison 0 = épisodes spéciaux
         if(
 
             season.season_number === 0
@@ -621,13 +623,22 @@ async function getShowDetails(
 
             .filter(
 
-                episode=>
+                episode=>{
 
-                    episode.air_date &&
+                    if(!episode.air_date){
 
-                    new Date(
-                        episode.air_date
-                    ) <= today
+                        return false;
+
+                    }
+
+                    const airDate =
+                        new Date(
+                            episode.air_date
+                        );
+
+                    return airDate <= today;
+
+                }
 
             )
 
@@ -639,7 +650,7 @@ async function getShowDetails(
     // DETAILS
     // ==========================================
 
-    const details={
+    const details = {
 
         seasons:
             show.number_of_seasons || 0,
@@ -661,7 +672,8 @@ async function getShowDetails(
 
     };
 
-    cache[id]=details;
+    cache[id] =
+        details;
 
     saveSeriesCache(
         cache
@@ -691,96 +703,99 @@ async function enrichLibrary(
 
     ){
 
-        /*
-         * On récupère les informations actuelles
-         * de TMDB pour chaque série.
-         *
-         * Au premier chargement, forceRefresh = true.
-         * Cela permet de détecter immédiatement les
-         * nouvelles saisons et les nouveaux épisodes.
-         */
+        try{
 
-        const details =
+            const details =
 
-            await getShowDetails(
+                await getShowDetails(
 
-                show.id,
+                    show.id,
 
-                forceRefresh
+                    forceRefresh
+
+                );
+
+            if(!details){
+
+                continue;
+
+            }
+
+            // ======================================
+            // INFORMATIONS TMDB
+            // ======================================
+
+            if(
+
+                show.seasons !==
+                details.seasons
+
+                ||
+
+                show.episodes !==
+                details.episodes
+
+                ||
+
+                show.tmdb !==
+                details.tmdb
+
+                ||
+
+                show.tmdbStatus !==
+                details.status
+
+            ){
+
+                show.seasons =
+                    details.seasons;
+
+                show.episodes =
+                    details.episodes;
+
+                show.tmdb =
+                    details.tmdb;
+
+                show.tmdbStatus =
+                    details.status || null;
+
+                updated = true;
+
+            }
+
+            // ======================================
+            // PROCHAIN ÉPISODE
+            // ======================================
+
+            if(
+
+                show.nextEpisode !==
+                details.nextEpisode
+
+            ){
+
+                show.nextEpisode =
+                    details.nextEpisode;
+
+                updated = true;
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(
+
+                `Erreur mise à jour ${show.name}:`,
+
+                error
 
             );
-
-        if(!details){
-
-            continue;
-
-        }
-
-        // ==========================================
-        // MISE À JOUR DES INFORMATIONS
-        // ==========================================
-
-        if(
-
-            show.seasons !==
-            details.seasons
-
-            ||
-
-            show.episodes !==
-            details.episodes
-
-            ||
-
-            show.tmdb !==
-            details.tmdb
-
-            ||
-
-            show.tmdbStatus !==
-            details.status
-
-        ){
-
-            show.seasons =
-                details.seasons;
-
-            show.episodes =
-                details.episodes;
-
-            show.tmdb =
-                details.tmdb;
-
-            show.tmdbStatus =
-                details.status || null;
-
-            updated = true;
-
-        }
-
-        // ==========================================
-        // PROCHAIN ÉPISODE
-        // ==========================================
-
-        if(
-
-            show.nextEpisode !==
-            details.nextEpisode
-
-        ){
-
-            show.nextEpisode =
-                details.nextEpisode;
-
-            updated = true;
 
         }
 
     }
-
-    // ==========================================
-    // SAUVEGARDE
-    // ==========================================
 
     if(updated){
 
@@ -850,19 +865,19 @@ async function searchTMDB(query){
     if(!data)
         return [];
 
-    return (data.results || [])
+    return (
 
-        .sort(
+        data.results || []
 
-            (a,b)=>
+    ).sort(
 
-                b.popularity
+        (a,b)=>
 
-                -
+            b.popularity
+            -
+            a.popularity
 
-                a.popularity
-
-        );
+    );
 
 }
 
@@ -882,7 +897,7 @@ function updateDashboard(){
 
     let totalAverage = [];
 
-    const counters={
+    const counters = {
 
         all:library.length,
 
@@ -896,7 +911,15 @@ function updateDashboard(){
 
     };
 
-    for(const show of library){
+    for(
+
+        const show
+
+        of
+
+        library
+
+    ){
 
         const notes =
 
@@ -923,7 +946,6 @@ function updateDashboard(){
             average(notes);
 
         totalEpisodes +=
-
             show.episodes || 0;
 
         watchedEpisodes +=
@@ -941,7 +963,7 @@ function updateDashboard(){
         // STATUS
         // ===================================
 
-        if(ratedEpisodes===0){
+        if(ratedEpisodes === 0){
 
             counters.planned++;
 
@@ -969,16 +991,16 @@ function updateDashboard(){
         }
 
         // ===================================
-        // MASTERPIECES
+        // MASTERPIECE
         // ===================================
 
         if(
 
-            notes.length>=10
+            notes.length >= 10
 
             &&
 
-            averageScore>=9
+            averageScore >= 9
 
         ){
 
@@ -1047,7 +1069,6 @@ function updateDashboard(){
         masterpieces;
 
     dashboardProgress.textContent =
-
         `${globalProgress}%`;
 
     // ===================================
@@ -1061,18 +1082,16 @@ function updateDashboard(){
 
     dashboardProgressCircle.style.strokeDashoffset =
 
-        circumference -
+        circumference
+
+        -
 
         (
 
             circumference
-
             *
-
             globalProgress
-
             /
-
             100
 
         );
@@ -1121,17 +1140,13 @@ function getSeriesNotes(showId){
             ([key])=>
 
                 key.startsWith(
-
                     `${showId}-`
-
                 )
 
         )
 
         .map(
-
             ([,value])=>value
-
         );
 
 }
@@ -1179,11 +1194,11 @@ function getSeriesStatus(show){
 
     if(
 
-        score>=9
+        score >= 9
 
         &&
 
-        notes.length>=10
+        notes.length >= 10
 
     ){
 
@@ -1201,7 +1216,7 @@ function getSeriesStatus(show){
     // À COMMENCER
     // ==========================================
 
-    if(progress===0){
+    if(progress === 0){
 
         return{
 
@@ -1219,7 +1234,7 @@ function getSeriesStatus(show){
 
     if(
 
-        progress>=100
+        progress >= 100
 
         &&
 
@@ -1335,7 +1350,9 @@ function createSeriesCard(show){
 
             <div class="series-info">
 
-                ${show.seasons || "?"} saison${show.seasons > 1 ? "s" : ""}
+                ${show.seasons || "?"}
+
+                saison${show.seasons > 1 ? "s" : ""}
 
                 •
 
@@ -1387,7 +1404,6 @@ function createSeriesCard(show){
         ()=>{
 
             window.location.href =
-
                 `serie.html?id=${show.id}`;
 
         }
@@ -1413,11 +1429,8 @@ function createSeriesCard(show){
             event.stopPropagation();
 
             openSeriesMenu(
-
                 show,
-
                 menuButton
-
             );
 
         }
@@ -1438,7 +1451,7 @@ async function renderLibrary(data){
 
     if(!data.length){
 
-        mySeries.innerHTML=
+        mySeries.innerHTML =
 
         `
             <div class="empty-library">
@@ -1506,22 +1519,16 @@ function closeSeriesMenu(){
 }
 
 function openSeriesMenu(
-
     show,
-
     button
-
 ){
 
     closeSeriesMenu();
 
     const menu =
         createElement(
-
             "div",
-
             "series-context-menu"
-
         );
 
     menu.innerHTML =
@@ -1553,16 +1560,13 @@ function openSeriesMenu(
     );
 
     const rect =
-
         button.getBoundingClientRect();
 
     menu.style.left =
-
         `${rect.left}px`;
 
     menu.style.top =
-
-        `${rect.bottom+8}px`;
+        `${rect.bottom + 8}px`;
 
     openedMenu =
         menu;
@@ -1570,33 +1574,26 @@ function openSeriesMenu(
     menu
 
     .querySelector(
-
         "[data-action='open']"
-
     )
 
-    .onclick=()=>{
+    .onclick = ()=>{
 
-        window.location.href=
-
-        `serie.html?id=${show.id}`;
+        window.location.href =
+            `serie.html?id=${show.id}`;
 
     };
 
     menu
 
     .querySelector(
-
         "[data-action='remove']"
-
     )
 
-    .onclick=()=>{
+    .onclick = ()=>{
 
         removeFromLibrary(
-
             show.id
-
         );
 
         closeSeriesMenu();
@@ -1606,11 +1603,8 @@ function openSeriesMenu(
 }
 
 document.addEventListener(
-
     "click",
-
     closeSeriesMenu
-
 );
 
 // ======================================================
@@ -1642,7 +1636,6 @@ filterButtons.forEach(
                 );
 
                 currentFilter =
-
                     button.dataset.filter;
 
                 visibleSeries =
@@ -1673,9 +1666,7 @@ collectionSearch.addEventListener(
             currentSearch =
 
                 event.target.value
-
                 .trim()
-
                 .toLowerCase();
 
             visibleSeries =
@@ -1705,22 +1696,29 @@ sortButton.addEventListener(
 
             case "recent":
 
-                currentSort="name";
+                currentSort =
+                    "name";
+
                 break;
 
             case "name":
 
-                currentSort="rating";
+                currentSort =
+                    "rating";
+
                 break;
 
             case "rating":
 
-                currentSort="progress";
+                currentSort =
+                    "progress";
+
                 break;
 
             default:
 
-                currentSort="recent";
+                currentSort =
+                    "recent";
 
         }
 
@@ -1764,7 +1762,8 @@ function openModal(){
 
     results.innerHTML = "";
 
-    resultsCount.textContent = "0 résultat";
+    resultsCount.textContent =
+        "0 résultat";
 
     searchInput.focus();
 
@@ -1784,10 +1783,11 @@ function closeSeriesModal(){
 
 function filterLibrary(data){
 
-    let filtered=[...data];
+    let filtered =
+        [...data];
 
     // ==========================
-    // Search
+    // SEARCH
     // ==========================
 
     if(currentSearch){
@@ -1799,13 +1799,9 @@ function filterLibrary(data){
                 show=>
 
                     show.name
-
                     .toLowerCase()
-
                     .includes(
-
                         currentSearch
-
                     )
 
             );
@@ -1813,10 +1809,10 @@ function filterLibrary(data){
     }
 
     // ==========================
-    // Status
+    // STATUS
     // ==========================
 
-    if(currentFilter!=="all"){
+    if(currentFilter !== "all"){
 
         filtered =
 
@@ -1825,15 +1821,14 @@ function filterLibrary(data){
                 show=>
 
                     getSeriesStatus(show)
-
-                    .class===currentFilter
+                    .class === currentFilter
 
             );
 
     }
 
     // ==========================
-    // Sort
+    // SORT
     // ==========================
 
     switch(currentSort){
@@ -1845,9 +1840,7 @@ function filterLibrary(data){
                 (a,b)=>
 
                     a.name.localeCompare(
-
                         b.name
-
                     )
 
             );
@@ -1892,11 +1885,11 @@ function filterLibrary(data){
 
                 (a,b)=>
 
-                    (b.addedAt||0)
+                    (b.addedAt || 0)
 
                     -
 
-                    (a.addedAt||0)
+                    (a.addedAt || 0)
 
             );
 
@@ -1914,21 +1907,17 @@ async function updateCollection(){
 
     refreshStorage();
 
-    let filtered =
+    const filtered =
 
         filterLibrary(
-
             library
-
         );
 
     currentLibrary =
         filtered;
 
     await renderLibrary(
-
         filtered
-
     );
 
     updateDashboard();
@@ -1947,22 +1936,18 @@ function removeFromLibrary(id){
 
             show=>
 
-                show.id!==id
+                show.id !== id
 
         );
 
     saveLibrary(
-
         library
-
     );
 
     updateCollection();
 
     showToast(
-
         "Série supprimée"
-
     );
 
 }
@@ -1973,17 +1958,29 @@ function removeFromLibrary(id){
 
 function addRecentSearch(query){
 
-    let searches = getRecentSearches();
+    let searches =
+        getRecentSearches();
 
-    searches = searches.filter(
-        item => item !== query
+    searches =
+
+        searches.filter(
+            item =>
+                item !== query
+        );
+
+    searches.unshift(
+        query
     );
 
-    searches.unshift(query);
+    searches =
+        searches.slice(
+            0,
+            8
+        );
 
-    searches = searches.slice(0,8);
-
-    saveRecentSearches(searches);
+    saveRecentSearches(
+        searches
+    );
 
 }
 
@@ -1991,25 +1988,32 @@ function loadRecentSearches(){
 
     recentSearches.innerHTML = "";
 
-    getRecentSearches().forEach(search=>{
+    getRecentSearches().forEach(
+        search=>{
 
-        const button = createElement(
-            "button"
-        );
+            const button =
+                createElement(
+                    "button"
+                );
 
-        button.textContent = search;
+            button.textContent =
+                search;
 
-        button.onclick = ()=>{
+            button.onclick = ()=>{
 
-            searchInput.value = search;
+                searchInput.value =
+                    search;
 
-            searchSeries();
+                searchSeries();
 
-        };
+            };
 
-        recentSearches.appendChild(button);
+            recentSearches.appendChild(
+                button
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -2019,7 +2023,9 @@ function loadRecentSearches(){
 
 async function searchSeries(){
 
-    console.log("Recherche lancée");
+    console.log(
+        "Recherche lancée"
+    );
 
     const query =
 
@@ -2029,7 +2035,9 @@ async function searchSeries(){
     if(!query)
         return;
 
-    addRecentSearch(query);
+    addRecentSearch(
+        query
+    );
 
     loadRecentSearches();
 
@@ -2091,13 +2099,14 @@ function displayResults(series){
     resultsCount.textContent =
 
         `${series.length} résultat${
-            series.length>1
-            ?"s":""
+            series.length > 1
+            ? "s"
+            : ""
         }`;
 
     if(!series.length){
 
-        results.innerHTML=
+        results.innerHTML =
 
         `
             <div class="empty-library">
@@ -2123,7 +2132,7 @@ function displayResults(series){
 
                 serie=>
 
-                    serie.id===show.id
+                    serie.id === show.id
 
             );
 
@@ -2152,15 +2161,13 @@ function displayResults(series){
             "—";
 
         const card =
+
             createElement(
-
                 "article",
-
                 "card"
-
             );
 
-        card.innerHTML=
+        card.innerHTML =
 
         `
             <img
@@ -2237,7 +2244,7 @@ function displayResults(series){
 
             window.location.href =
 
-            `serie.html?id=${show.id}`;
+                `serie.html?id=${show.id}`;
 
         };
 
@@ -2245,13 +2252,17 @@ function displayResults(series){
 
             card
 
-            .querySelector(".add-btn")
+            .querySelector(
+                ".add-btn"
+            )
 
             .onclick = async event=>{
 
                 event.stopPropagation();
 
-                await addToLibrary(show);
+                await addToLibrary(
+                    show
+                );
 
             };
 
@@ -2261,13 +2272,17 @@ function displayResults(series){
 
             card
 
-            .querySelector(".add-btn")
+            .querySelector(
+                ".add-btn"
+            )
 
             .disabled = true;
 
         }
 
-        results.appendChild(card);
+        results.appendChild(
+            card
+        );
 
     });
 
@@ -2287,16 +2302,14 @@ async function addToLibrary(show){
 
             serie=>
 
-                serie.id===show.id
+                serie.id === show.id
 
         )
 
     ){
 
         showToast(
-
             "Série déjà ajoutée"
-
         );
 
         return;
@@ -2306,18 +2319,17 @@ async function addToLibrary(show){
     const details =
 
         await getShowDetails(
-
             show.id,
-
             true
-
         );
 
     library.unshift({
 
-        id:show.id,
+        id:
+            show.id,
 
-        name:show.name,
+        name:
+            show.name,
 
         poster:
 
@@ -2370,9 +2382,7 @@ async function addToLibrary(show){
     updateCollection();
 
     showToast(
-
         `${show.name} ajoutée`
-
     );
 
     closeSeriesModal();
@@ -2386,11 +2396,8 @@ async function addToLibrary(show){
 // ======================================================
 
 searchBtn.addEventListener(
-
     "click",
-
     searchSeries
-
 );
 
 searchInput.addEventListener(
@@ -2399,7 +2406,7 @@ searchInput.addEventListener(
 
     event=>{
 
-        if(event.key==="Enter"){
+        if(event.key === "Enter"){
 
             searchSeries();
 
@@ -2415,7 +2422,7 @@ collectionSearch.addEventListener(
 
     event=>{
 
-        if(event.key==="Enter"){
+        if(event.key === "Enter"){
 
             searchSeries();
 
@@ -2431,7 +2438,7 @@ discoverBtn.addEventListener(
 
     ()=>{
 
-        const suggestions=[
+        const suggestions = [
 
             "Breaking Bad",
 
@@ -2458,9 +2465,7 @@ discoverBtn.addEventListener(
                 Math.floor(
 
                     Math.random()
-
                     *
-
                     suggestions.length
 
                 )
@@ -2474,27 +2479,18 @@ discoverBtn.addEventListener(
 );
 
 addSeriesBtn.addEventListener(
-
     "click",
-
     openModal
-
 );
 
 addSeriesCard.addEventListener(
-
     "click",
-
     openModal
-
 );
 
 closeModal.addEventListener(
-
     "click",
-
     closeSeriesModal
-
 );
 
 addSeriesModal.addEventListener(
@@ -2503,7 +2499,10 @@ addSeriesModal.addEventListener(
 
     event=>{
 
-        if(event.target===addSeriesModal){
+        if(
+            event.target ===
+            addSeriesModal
+        ){
 
             closeSeriesModal();
 
@@ -2521,7 +2520,7 @@ document.addEventListener(
 
         if(
 
-            event.key==="Escape"
+            event.key === "Escape"
 
             &&
 
@@ -2546,17 +2545,13 @@ clearRecent.addEventListener(
     ()=>{
 
         localStorage.removeItem(
-
             "bingeRateRecentSearches"
-
         );
 
         loadRecentSearches();
 
         showToast(
-
             "Historique effacé"
-
         );
 
     }
@@ -2575,16 +2570,22 @@ if(loadMoreTrigger){
 
             async entries=>{
 
-                const entry = entries[0];
+                const entry =
+                    entries[0];
 
                 if(!entry.isIntersecting)
                     return;
 
                 if(
+
                     visibleSeries >=
                     currentLibrary.length
-                )
+
+                ){
+
                     return;
+
+                }
 
                 visibleSeries +=
                     SERIES_PER_PAGE;
@@ -2617,20 +2618,24 @@ const appearObserver =
 
         entries=>{
 
-            entries.forEach(entry=>{
+            entries.forEach(
+                entry=>{
 
-                if(!entry.isIntersecting)
-                    return;
+                    if(
+                        !entry.isIntersecting
+                    )
+                        return;
 
-                entry.target.classList.add(
-                    "visible"
-                );
+                    entry.target.classList.add(
+                        "visible"
+                    );
 
-                appearObserver.unobserve(
-                    entry.target
-                );
+                    appearObserver.unobserve(
+                        entry.target
+                    );
 
-            });
+                }
+            );
 
         },
 
@@ -2660,20 +2665,25 @@ function observeElements(){
 
     )
 
-    .forEach(element=>{
+    .forEach(
 
-        if(
-            element.dataset.observed
-        )
-            return;
+        element=>{
 
-        element.dataset.observed = true;
+            if(
+                element.dataset.observed
+            )
+                return;
 
-        appearObserver.observe(
-            element
-        );
+            element.dataset.observed =
+                true;
 
-    });
+            appearObserver.observe(
+                element
+            );
+
+        }
+
+    );
 
 }
 
@@ -2711,7 +2721,7 @@ mutationObserver.observe(
 // RANDOM PLACEHOLDER
 // ======================================================
 
-const placeholders=[
+const placeholders = [
 
     "Breaking Bad",
 
@@ -2739,34 +2749,39 @@ const placeholders=[
 
 ];
 
-setInterval(()=>{
+setInterval(
 
-    if(
-        document.activeElement===collectionSearch
-    )
-        return;
+    ()=>{
 
-    const suggestion =
+        if(
+            document.activeElement ===
+            collectionSearch
+        )
+            return;
 
-        placeholders[
+        const suggestion =
 
-            Math.floor(
+            placeholders[
 
-                Math.random()
+                Math.floor(
 
-                *
+                    Math.random()
+                    *
+                    placeholders.length
 
-                placeholders.length
+                )
 
-            )
+            ];
 
-        ];
+        collectionSearch.placeholder =
 
-    collectionSearch.placeholder =
+            `Rechercher : ${suggestion}`;
 
-        `Rechercher : ${suggestion}`;
+    },
 
-},5000);
+    5000
+
+);
 
 // ======================================================
 // PRELOAD
@@ -2790,20 +2805,41 @@ async function loadPage(){
 
     /*
      * IMPORTANT :
-     * On force ici la récupération TMDB.
      *
-     * Cela actualise immédiatement les séries
-     * déjà présentes dans la bibliothèque, y compris
-     * celles qui étaient précédemment à 100 %.
+     * On force une actualisation complète au chargement.
+     *
+     * Cela permet de détecter immédiatement une nouvelle
+     * saison pour une série qui était déjà terminée.
+     *
+     * Exemple :
+     *
+     * Reacher
+     * Ancien stockage : 24 épisodes / 3 saisons
+     *
+     * TMDB :
+     * Nouvelle saison disponible
+     *
+     * Nouveau stockage :
+     * 30 épisodes / 4 saisons
+     *
+     * Progression :
+     * 24 / 30 = 80 %
+     *
+     * Statut :
+     * En cours
      */
 
-    await enrichLibrary(true);
+    await enrichLibrary(
+        true
+    );
 
     refreshStorage();
 
-    currentLibrary = [...library];
+    currentLibrary =
+        [...library];
 
-    visibleSeries = SERIES_PER_PAGE;
+    visibleSeries =
+        SERIES_PER_PAGE;
 
     updateDashboard();
 
